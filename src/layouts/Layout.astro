@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const title = Astro.props.title ?? t('meta.title');
+const description = Astro.props.description ?? t('meta.description');
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : Astro.url.pathname;
+
+const alt = (path: string) =>
+  Astro.site ? new URL(path, Astro.site).href : path;
+---
+
+<!doctype html>
+<html lang={lang} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es" href={alt('/')} />
+    <link rel="alternate" hreflang="en" href={alt('/en/')} />
+    <link rel="alternate" hreflang="x-default" href={alt('/')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VIRAND" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_CO' : 'en_US'} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={alt('/og.png')} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="VIRAND — Build Perception" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={alt('/og.png')} />
+
+    <meta name="generator" content={Astro.generator} />
+
+    {/* Set theme before paint to avoid a flash. Brand default is dark. */}
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('virand-theme');
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.dataset.theme = saved;
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">{t('a11y.skip')}</a>
+    <Nav />
+    <slot />
+    <div class="grain" aria-hidden="true"></div>
+
+    <script>
+      // Scroll-reveal: adds `.is-visible` to `[data-reveal]` elements.
+      // Elements already on screen at load animate in immediately (staggered
+      // via --reveal-delay); the rest animate as they enter the viewport.
+      const els = document.querySelectorAll('[data-reveal]');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduced || !('IntersectionObserver' in window)) {
+        for (const el of els) el.classList.add('is-visible');
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px' },
+        );
+        for (const el of els) io.observe(el);
+      }
+    </script>
+  </body>
+</html>

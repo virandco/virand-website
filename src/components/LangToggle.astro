@@ -1,0 +1,48 @@
+---
+import { otherLang, localizedPath, useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const target = otherLang(lang);
+const href = localizedPath('/', target);
+---
+
+<a class="lang-toggle" href={href} hreflang={target} aria-label={t('a11y.langToggle')}>
+  <span class:list={['lang-toggle__opt', { 'is-active': lang === 'es' }]}>ES</span>
+  <span class="lang-toggle__sep" aria-hidden="true">/</span>
+  <span class:list={['lang-toggle__opt', { 'is-active': lang === 'en' }]}>EN</span>
+</a>
+
+<style>
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.35rem 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+  }
+
+  .lang-toggle__opt {
+    transition: color 0.2s var(--ease-brand);
+  }
+
+  .lang-toggle__opt.is-active {
+    color: var(--text-strong);
+  }
+
+  .lang-toggle__sep {
+    opacity: 0.4;
+  }
+
+  .lang-toggle:hover .lang-toggle__opt:not(.is-active) {
+    color: var(--text);
+  }
+</style>

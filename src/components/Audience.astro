@@ -1,0 +1,73 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Section from './Section.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const groups = [
+  { name: t('audience.a1.name'), body: t('audience.a1.body') },
+  { name: t('audience.a2.name'), body: t('audience.a2.body') },
+  { name: t('audience.a3.name'), body: t('audience.a3.body') },
+];
+---
+
+<Section id="a-quien-servimos" mark="03">
+  <SectionHeading title={t('audience.heading')} />
+
+  <div class="audience">
+    {
+      groups.map((group, i) => (
+        <article class="audience__item" data-reveal style={`--reveal-delay: ${i * 90}ms`}>
+          <h3 class="audience__name">{group.name}</h3>
+          <p class="audience__body">{group.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</Section>
+
+<style>
+  .audience {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .audience__item {
+    display: grid;
+    gap: 0.9rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--accent);
+  }
+
+  .audience__name {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+    line-height: 1.05;
+    text-transform: none;
+  }
+
+  .audience__body {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  @media (min-width: 820px) {
+    .audience {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: start;
+    }
+
+    /* Stagger the middle column down for editorial asymmetry */
+    .audience__item:nth-child(2) {
+      margin-top: clamp(3rem, 8vw, 6rem);
+    }
+
+    .audience__item:nth-child(3) {
+      margin-top: clamp(1.5rem, 4vw, 3rem);
+    }
+  }
+</style>

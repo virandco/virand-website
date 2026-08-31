@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  intro?: string;
+}
+
+const { title, intro } = Astro.props;
+---
+
+<header class="sec-head">
+  <h2 data-reveal>{title}</h2>
+  {intro && <p data-reveal style="--reveal-delay: 80ms">{intro}</p>}
+</header>
+
+<style>
+  .sec-head {
+    margin-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
+    max-width: 42rem;
+  }
+
+  .sec-head h2 {
+    margin: 0;
+    font-size: clamp(2.1rem, 5vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .sec-head p {
+    margin: 1.1rem 0 0;
+    max-width: 34rem;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--text);
+  }
+</style>

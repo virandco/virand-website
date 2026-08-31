@@ -1,0 +1,94 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { WHATSAPP } from '../consts';
+import Wordmark from './Wordmark.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+
+const contactHref = WHATSAPP.isProvisional ? '#contacto' : WHATSAPP.url;
+const contactRel = WHATSAPP.isProvisional ? undefined : 'noopener noreferrer';
+const contactTarget = WHATSAPP.isProvisional ? undefined : '_blank';
+---
+
+<footer class="footer">
+  <div class="footer__inner shell">
+    <div class="footer__brand">
+      <Wordmark lang={lang} orientation="vertical" size={8} />
+      <p class="footer__tagline">{t('footer.tagline')}</p>
+    </div>
+
+    <div class="footer__meta">
+      <a class="footer__link" href={contactHref} rel={contactRel} target={contactTarget}>
+        {t('footer.contact')}
+      </a>
+      <p class="footer__copy">© {year} VIRAND. {t('footer.rights')}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--line);
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+
+  .footer__inner {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .footer__brand {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .footer__tagline {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+  }
+
+  .footer__meta {
+    display: grid;
+    gap: 0.75rem;
+    align-content: end;
+  }
+
+  .footer__link {
+    justify-self: start;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-strong);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: color 0.2s var(--ease-brand);
+  }
+
+  .footer__link:hover {
+    color: var(--accent-text);
+  }
+
+  .footer__copy {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  @media (min-width: 720px) {
+    .footer__inner {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+
+    .footer__meta {
+      justify-items: end;
+      text-align: right;
+    }
+  }
+</style>

@@ -1,0 +1,101 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Section from './Section.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const steps = [
+  { name: t('process.p1.name'), body: t('process.p1.body') },
+  { name: t('process.p2.name'), body: t('process.p2.body') },
+  { name: t('process.p3.name'), body: t('process.p3.body') },
+  { name: t('process.p4.name'), body: t('process.p4.body'), loop: true },
+];
+---
+
+<Section id="proceso" mark="04">
+  <SectionHeading title={t('process.heading')} />
+
+  <ol class="process">
+    {
+      steps.map((step, i) => (
+        <li class="process__step" data-reveal style={`--reveal-delay: ${i * 80}ms`}>
+          <span class="process__node" data-loop={step.loop ? 'true' : 'false'} aria-hidden="true" />
+          <div class="process__content">
+            <h3 class="process__name">{step.name}</h3>
+            <p class="process__body">{step.body}</p>
+            {step.loop && <span class="process__loop">{t('process.loop')}</span>}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</Section>
+
+<style>
+  .process {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 46rem;
+  }
+
+  .process__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.25rem 1fr;
+    gap: 1.25rem;
+    padding-bottom: clamp(2rem, 5vw, 3rem);
+  }
+
+  .process__step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(0.625rem - 1px);
+    top: 1.25rem;
+    bottom: 0;
+    width: 2px;
+    background: var(--line);
+  }
+
+  .process__node {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-top: 0.4rem;
+    background: var(--accent);
+    outline: 4px solid var(--bg);
+  }
+
+  .process__node[data-loop='true'] {
+    background: var(--gold);
+  }
+
+  .process__content {
+    display: grid;
+    gap: 0.55rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .process__name {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+    line-height: 1;
+    text-transform: none;
+  }
+
+  .process__body {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .process__loop {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+</style>

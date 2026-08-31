@@ -1,0 +1,75 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Section from './Section.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const services = [
+  { name: t('services.s1.name'), body: t('services.s1.body') },
+  { name: t('services.s2.name'), body: t('services.s2.body') },
+  { name: t('services.s3.name'), body: t('services.s3.body') },
+  { name: t('services.s4.name'), body: t('services.s4.body') },
+];
+---
+
+<Section id="servicios" mark="02">
+  <SectionHeading title={t('services.heading')} intro={t('services.intro')} />
+
+  <ul class="services">
+    {
+      services.map((service, i) => (
+        <li class="services__row" data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+          <h3 class="services__name">{service.name}</h3>
+          <p class="services__body">{service.body}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Section>
+
+<style>
+  .services {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .services__row {
+    display: grid;
+    gap: 0.6rem;
+    padding-block: clamp(1.75rem, 4vw, 2.75rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .services__name {
+    margin: 0;
+    font-size: clamp(1.6rem, 4vw, 2.9rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    transition: color 0.25s var(--ease-brand);
+  }
+
+  .services__body {
+    margin: 0;
+    max-width: 52ch;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  @media (min-width: 860px) {
+    .services__row {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: baseline;
+    }
+
+    .services__row:hover .services__name {
+      color: var(--accent-text);
+    }
+  }
+</style>

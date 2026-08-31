@@ -1,0 +1,123 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { NAV_ITEMS } from '../consts';
+import Wordmark from './Wordmark.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import LangToggle from './LangToggle.astro';
+import WhatsAppCta from './WhatsAppCta.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div data-nav-sentinel aria-hidden="true"></div>
+
+<header class="nav" data-nav>
+  <div class="nav__inner shell">
+    <Wordmark lang={lang} wineIcon />
+
+    <nav class="nav__links" aria-label={t('nav.sections')}>
+      {
+        NAV_ITEMS.map((item) => (
+          <a class="nav__link" href={`#${item.id}`}>
+            {item.label[lang]}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="nav__actions">
+      <LangToggle lang={lang} />
+      <ThemeToggle lang={lang} />
+      <WhatsAppCta lang={lang} size="sm" compact />
+    </div>
+  </div>
+</header>
+
+<script>
+  const nav = document.querySelector('[data-nav]');
+  const sentinel = document.querySelector('[data-nav-sentinel]');
+
+  if (nav && sentinel && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      ([entry]) => nav.toggleAttribute('data-stuck', !entry.isIntersecting),
+      { rootMargin: '0px' },
+    );
+    io.observe(sentinel);
+  }
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 0.3s var(--ease-brand),
+      border-color 0.3s var(--ease-brand);
+  }
+
+  .nav[data-stuck] {
+    background-color: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom-color: var(--line);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .nav[data-stuck] {
+      background-color: var(--bg);
+    }
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  .nav__links {
+    display: none;
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .nav__link {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: color 0.2s var(--ease-brand);
+  }
+
+  .nav__link:hover {
+    color: var(--text-strong);
+  }
+
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  @media (min-width: 900px) {
+    .nav {
+      height: 68px;
+    }
+
+    .nav__links {
+      display: flex;
+    }
+
+    .nav__actions {
+      gap: 0.6rem;
+    }
+  }
+</style>

@@ -1,0 +1,108 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+{/*
+  One deliberate cinematic cut. This band stays obsidian in both themes
+  (the single intentional theme break the page allows). The clip's first
+  frame shows on load (preload="metadata"); it only starts playing once
+  scrolled into view, and never under prefers-reduced-motion.
+*/}
+<section class="mband" aria-label={t('motion.tagline')}>
+  <video
+    class="mband__video"
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    aria-hidden="true"
+    data-motion-video
+  >
+    <source src="/headeranimation.mp4" type="video/mp4" />
+  </video>
+
+  <div class="mband__scrim"></div>
+
+  <div class="mband__caption">
+    <p class="mband__tagline" data-reveal>{t('motion.tagline')}</p>
+    <p class="mband__sub" data-reveal style="--reveal-delay: 90ms">{t('motion.caption')}</p>
+  </div>
+</section>
+
+<style>
+  .mband {
+    position: relative;
+    display: grid;
+    align-items: end;
+    min-height: clamp(320px, 52vh, 560px);
+    background: #080808;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .mband__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mband__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(120% 80% at 50% 40%, transparent 42%, rgba(8, 8, 8, 0.55) 100%),
+      linear-gradient(to top, rgba(8, 8, 8, 0.88) 0%, transparent 58%);
+  }
+
+  .mband__caption {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding: clamp(1.5rem, 5vw, 3rem) clamp(1.25rem, 5vw, 3rem);
+  }
+
+  .mband__tagline {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    font-size: clamp(1.9rem, 5vw, 3.75rem);
+    color: #ffffff;
+  }
+
+  .mband__sub {
+    margin: 0.6rem 0 0;
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.62);
+  }
+</style>
+
+<script>
+  const video = document.querySelector('[data-motion-video]') as HTMLVideoElement | null;
+
+  if (video && 'IntersectionObserver' in window) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && !reduced) {
+            void video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(video);
+  }
+</script>

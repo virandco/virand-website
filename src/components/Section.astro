@@ -1,0 +1,54 @@
+---
+interface Props {
+  id: string;
+  /** Massive muted numeral behind the section (brand watermark, e.g. "01"). */
+  mark?: string;
+  class?: string;
+}
+
+const { id, mark, class: className } = Astro.props;
+---
+
+<section class:list={['sec', className]} id={id}>
+  {mark && <span class="sec__mark" aria-hidden="true">{mark}</span>}
+  <div class="sec__body shell">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .sec {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(4rem, 9vh, 6.5rem);
+  }
+
+  .sec__mark {
+    position: absolute;
+    z-index: 0;
+    right: -0.06em;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(8rem, 26vw, 22rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+    opacity: 0.08;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .sec__body {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 1024px) {
+    .sec__mark {
+      right: 0.5rem;
+    }
+  }
+</style>

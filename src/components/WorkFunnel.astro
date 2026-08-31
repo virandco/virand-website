@@ -1,0 +1,96 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import Section from './Section.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const stages = [
+  { name: t('work.s1.name'), body: t('work.s1.body') },
+  { name: t('work.s2.name'), body: t('work.s2.body') },
+  { name: t('work.s3.name'), body: t('work.s3.body') },
+];
+---
+
+<Section id="como-trabajamos" mark="01">
+  <SectionHeading title={t('work.heading')} intro={t('work.intro')} />
+
+  <ol class="funnel">
+    {
+      stages.map((stage, i) => (
+        <li class="funnel__stage" data-reveal style={`--reveal-delay: ${i * 90}ms`}>
+          <span class="funnel__rule" data-step={i + 1} />
+          <h3 class="funnel__name">{stage.name}</h3>
+          <p class="funnel__body">{stage.body}</p>
+        </li>
+      ))
+    }
+  </ol>
+</Section>
+
+<style>
+  .funnel {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .funnel__stage {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+
+  .funnel__rule {
+    display: block;
+    height: 2px;
+    background: var(--accent);
+    width: 100%;
+  }
+
+  .funnel__rule[data-step='2'] {
+    width: 66%;
+  }
+
+  .funnel__rule[data-step='3'] {
+    width: 33%;
+  }
+
+  .funnel__name {
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1;
+    text-transform: none;
+  }
+
+  .funnel__body {
+    margin: 0;
+    max-width: 32ch;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  @media (min-width: 820px) {
+    .funnel {
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+
+    .funnel__rule {
+      width: 100%;
+    }
+
+    /* On the row, the tapering reads left-to-right across the three columns */
+    .funnel__rule[data-step='2'] {
+      width: 78%;
+    }
+
+    .funnel__rule[data-step='3'] {
+      width: 52%;
+    }
+  }
+</style>

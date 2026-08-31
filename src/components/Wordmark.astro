@@ -1,0 +1,114 @@
+---
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+import {
+  ICON_PATHS,
+  ICON_VIEWBOX,
+  WORDMARK_PATHS,
+  WORDMARK_VIEWBOX,
+  VERTICAL_PATHS,
+  VERTICAL_VIEWBOX,
+} from '../lib/brand';
+
+interface Props {
+  lang: Lang;
+  /** Cap-height of the VIRAND wordmark, in px. The symbol matches it. */
+  size?: number;
+  /** `horizontal` = symbol beside wordmark (nav). `vertical` = stacked (footer). */
+  orientation?: 'horizontal' | 'vertical';
+  /** Keep the symbol wine in both themes (nav lockup). */
+  wineIcon?: boolean;
+}
+
+const {
+  lang,
+  size = 18,
+  orientation = 'horizontal',
+  wineIcon = false,
+} = Astro.props;
+const t = useTranslations(lang);
+const home = lang === 'es' ? '/' : '/en/';
+---
+
+<a
+  class:list={['wordmark', `wordmark--${orientation}`, { 'wordmark--wine': wineIcon }]}
+  href={home}
+  aria-label={t('a11y.home')}
+  style={`--logo-size:${size}px`}
+>
+  {
+    orientation === 'vertical' ? (
+      <svg
+        class="wordmark__lockup"
+        viewBox={VERTICAL_VIEWBOX}
+        fill="currentColor"
+        aria-hidden="true"
+        focusable="false"
+        set:html={VERTICAL_PATHS}
+      />
+    ) : (
+      <Fragment>
+        <svg
+          class="wordmark__icon"
+          viewBox={ICON_VIEWBOX}
+          fill="currentColor"
+          aria-hidden="true"
+          focusable="false"
+          set:html={ICON_PATHS}
+        />
+        <svg
+          class="wordmark__type"
+          viewBox={WORDMARK_VIEWBOX}
+          fill="currentColor"
+          aria-hidden="true"
+          focusable="false"
+          set:html={WORDMARK_PATHS}
+        />
+      </Fragment>
+    )
+  }
+</a>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    font-size: var(--logo-size, 18px);
+    line-height: 0;
+    color: var(--text-strong);
+  }
+
+  .wordmark--horizontal {
+    align-items: center;
+    /* Brandbook horizontal lockup: symbol no taller than the letterforms. */
+    gap: 0.44em;
+  }
+
+  .wordmark__icon,
+  .wordmark__type {
+    display: block;
+    width: auto;
+    height: 1em;
+  }
+
+  /* Nav lockup: symbol stays wine, wordmark takes the theme ink. */
+  .wordmark--wine .wordmark__icon {
+    color: var(--wine);
+  }
+
+  /* Vertical lockup is a single tone; height scales from the same cap-height. */
+  .wordmark__lockup {
+    display: block;
+    width: auto;
+    height: calc(var(--logo-size, 18px) * 6.98);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .wordmark {
+      transition: opacity 0.2s var(--ease-brand);
+    }
+  }
+
+  .wordmark:hover {
+    opacity: 0.72;
+  }
+</style>

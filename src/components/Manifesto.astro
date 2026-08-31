@@ -1,0 +1,68 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="manifesto section" id="manifiesto">
+  <div class="manifesto__inner shell">
+    <h2 class="manifesto__heading" data-reveal>{t('manifesto.heading')}</h2>
+    <div class="manifesto__body">
+      <p data-reveal style="--reveal-delay: 90ms" set:html={t('manifesto.body1')} />
+      <p data-reveal style="--reveal-delay: 180ms" set:html={t('manifesto.body2')} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .manifesto {
+    background: var(--bg);
+  }
+
+  .manifesto__inner {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .manifesto__heading {
+    margin: 0;
+    max-width: 16ch;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .manifesto__body {
+    display: grid;
+    gap: 1.4rem;
+    max-width: 46ch;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.62;
+    color: var(--text);
+  }
+
+  .manifesto__body :global(p) {
+    margin: 0;
+  }
+
+  .manifesto__body :global(strong) {
+    font-weight: 600;
+    color: var(--text-strong);
+  }
+
+  @media (min-width: 900px) {
+    .manifesto__inner {
+      grid-template-columns: repeat(12, 1fr);
+      align-items: start;
+    }
+
+    .manifesto__heading {
+      grid-column: 1 / span 9;
+    }
+
+    .manifesto__body {
+      grid-column: 4 / span 8;
+    }
+  }
+</style>

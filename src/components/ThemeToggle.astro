@@ -1,0 +1,62 @@
+---
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<button type="button" class="theme-toggle" data-theme-toggle aria-label={t('a11y.themeToggle')}>
+  <Icon name="ph:sun-bold" class="theme-toggle__icon" data-when="dark" />
+  <Icon name="ph:moon-bold" class="theme-toggle__icon" data-when="light" />
+</button>
+
+<script>
+  const KEY = 'virand-theme';
+  for (const btn of document.querySelectorAll('[data-theme-toggle]')) {
+    btn.addEventListener('click', () => {
+      const root = document.documentElement;
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem(KEY, next);
+      } catch (e) {
+        /* private mode: keep the in-session choice, skip persistence */
+      }
+    });
+  }
+</script>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--text-dim);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition:
+      color 0.2s var(--ease-brand),
+      transform 0.15s var(--ease-brand);
+  }
+
+  .theme-toggle:hover {
+    color: var(--text-strong);
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.92);
+  }
+
+  .theme-toggle__icon {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+</style>

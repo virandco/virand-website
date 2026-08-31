@@ -1,0 +1,78 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import WhatsAppCta from './WhatsAppCta.astro';
+import { ICON_PATHS, ICON_VIEWBOX } from '../lib/brand';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="contact" id="contacto">
+  <svg
+    class="contact__mark"
+    viewBox={ICON_VIEWBOX}
+    fill="currentColor"
+    aria-hidden="true"
+    focusable="false"
+    set:html={ICON_PATHS}
+  />
+
+  <div class="contact__inner shell">
+    <h2 class="contact__heading" data-reveal>{t('contact.heading')}</h2>
+    <p class="contact__body" data-reveal style="--reveal-delay: 90ms">{t('contact.body')}</p>
+    <div class="contact__cta" data-reveal style="--reveal-delay: 180ms">
+      <WhatsAppCta lang={lang} size="md" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(6rem, 18vh, 12rem);
+    text-align: center;
+  }
+
+  .contact__mark {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(70vw, 40rem);
+    height: auto;
+    color: var(--text-strong);
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  .contact__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+  }
+
+  .contact__heading {
+    margin: 0;
+    max-width: 18ch;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+
+  .contact__body {
+    margin: 1.5rem 0 0;
+    max-width: 40ch;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  .contact__cta {
+    margin-top: 2.75rem;
+  }
+</style>

@@ -1,0 +1,101 @@
+---
+import { Icon } from 'astro-icon/components';
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+import { WHATSAPP } from '../consts';
+
+interface Props {
+  lang: Lang;
+  /** `sm` for the nav, `md` for in-page CTAs. */
+  size?: 'sm' | 'md';
+  /** Hide the label below a breakpoint (nav on small screens). */
+  compact?: boolean;
+  class?: string;
+}
+
+const { lang, size = 'md', compact = false, class: className } = Astro.props;
+const t = useTranslations(lang);
+const label = t('nav.cta');
+
+// Provisional: no real line yet. Link scrolls to the contact section.
+const external = !WHATSAPP.isProvisional;
+const attrs = external
+  ? { href: WHATSAPP.url, target: '_blank', rel: 'noopener noreferrer' }
+  : { href: WHATSAPP.url };
+---
+
+<a
+  {...attrs}
+  class:list={['wa-cta', `wa-cta--${size}`, { 'wa-cta--compact': compact }, className]}
+>
+  <Icon name="ph:whatsapp-logo-fill" class="wa-cta__icon" />
+  <span class="wa-cta__label">{label}</span>
+</a>
+
+<style>
+  .wa-cta {
+    --pad-x: 1.1rem;
+    --pad-y: 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--pad-y) var(--pad-x);
+    background: var(--cta-bg);
+    color: var(--cta-text);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: var(--radius-sm);
+    transition:
+      background-color 0.2s var(--ease-brand),
+      transform 0.12s var(--ease-brand);
+  }
+
+  .wa-cta:hover {
+    background: var(--cta-bg-hover);
+  }
+
+  .wa-cta:active {
+    transform: translateY(1px);
+  }
+
+  .wa-cta__icon {
+    width: 1.05em;
+    height: 1.05em;
+  }
+
+  .wa-cta--sm {
+    --pad-x: 0.85rem;
+    --pad-y: 0.55rem;
+    font-size: 0.8125rem;
+  }
+
+  .wa-cta--md {
+    --pad-x: 1.4rem;
+    --pad-y: 0.95rem;
+    font-size: 0.95rem;
+  }
+
+  /* Nav on small screens: icon only, keep the tap target square */
+  .wa-cta--compact {
+    --pad-x: var(--pad-y);
+  }
+
+  .wa-cta--compact .wa-cta__label {
+    display: none;
+  }
+
+  @media (min-width: 560px) {
+    .wa-cta--compact {
+      --pad-x: 0.85rem;
+    }
+
+    .wa-cta--compact .wa-cta__label {
+      display: inline;
+    }
+  }
+</style>
