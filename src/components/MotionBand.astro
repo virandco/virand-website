@@ -7,19 +7,23 @@ const t = useTranslations(lang);
 
 {/*
   One deliberate cinematic cut. This band stays obsidian in both themes
-  (the single intentional theme break the page allows). The clip's first
-  frame shows on load (preload="metadata"); it only starts playing once
-  scrolled into view, and never under prefers-reduced-motion.
+  (the single intentional theme break the page allows). A poster frame
+  covers the load (iOS/WebKit render nothing for an un-played <video>,
+  hence the black box on mobile); playback autostarts muted + inline when
+  the band scrolls into view, and is held under prefers-reduced-motion.
 */}
 <section class="mband" aria-label={t('motion.tagline')}>
   <video
     class="mband__video"
+    autoplay
     muted
     loop
     playsinline
     preload="metadata"
+    poster="/headeranimation-poster.jpg"
     aria-hidden="true"
     data-motion-video
+    style="transform: translateZ(0); -webkit-transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden;"
   >
     <source src="/headeranimation.mp4" type="video/mp4" />
   </video>
@@ -43,12 +47,24 @@ const t = useTranslations(lang);
     isolation: isolate;
   }
 
+  /* Mobile: match the clip's own 16:9 box so the whole frame shows,
+     scaled down, instead of a cropped centre strip. */
+  @media (max-width: 767.98px) {
+    .mband {
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
   .mband__video {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* The compositing hints that fix the WebKit "black rectangle" bug live
+       in an inline style on the element itself — the CSS pipeline strips
+       -webkit- prefixes it deems unneeded, and old iOS still needs them. */
   }
 
   .mband__scrim {
@@ -89,20 +105,27 @@ const t = useTranslations(lang);
 <script>
   const video = document.querySelector('[data-motion-video]') as HTMLVideoElement | null;
 
-  if (video && 'IntersectionObserver' in window) {
+  if (video) {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && !reduced) {
-            void video.play().catch(() => {});
-          } else {
-            video.pause();
+
+    if (reduced) {
+      // Hold on the poster frame; cancel the autostart.
+      video.removeAttribute('autoplay');
+      video.pause();
+    } else if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              void video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
           }
-        }
-      },
-      { threshold: 0.25 },
-    );
-    io.observe(video);
+        },
+        { threshold: 0.25 },
+      );
+      io.observe(video);
+    }
   }
 </script>
