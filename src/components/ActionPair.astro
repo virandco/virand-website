@@ -1,0 +1,16 @@
+---
+import WhatsAppCta from './WhatsAppCta.astro';
+import { heroCopy, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+---
+<div class="actions">
+  <WhatsAppCta lang={lang} />
+  <a class="project-link" href="#cuestionario">{heroCopy[lang].project}<span aria-hidden="true">↗</span></a>
+</div>
+<style>
+  .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+  .project-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 1.25rem; font-size: .875rem; font-weight: 600; color: var(--text-strong); padding-block: .95rem; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+  .project-link:hover { color: var(--accent-text); }
+  @media(max-width: 479px) { .actions { gap: .75rem 1.25rem; } .project-link { font-size: .8125rem; gap: .75rem; } }
+</style>
