@@ -3,11 +3,14 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
   // Used for canonical URLs / OG tags. Update when the domain is final.
   site: 'https://virand.co',
+  // All pages remain static; only /api/proyecto opts into server rendering.
+  adapter: vercel(),
 
   // Single page in two languages: `/` (es) and `/en/` (en).
   i18n: {
