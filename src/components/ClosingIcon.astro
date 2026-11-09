@@ -1,0 +1,23 @@
+---
+import iconWine from '../assets/VIRAND-icono-wine.svg';
+---
+<section class="closing section" aria-label="Build Perception">
+  <div class="shell">
+    <div class="closing__icon" data-closing-icon aria-hidden="true">
+      <img src={iconWine.src} width="1928" height="1250" alt="" loading="lazy" />
+      <canvas></canvas>
+    </div>
+    <p>Build Perception</p>
+  </div>
+</section>
+<script>import '../lib/closingIcon';</script>
+<style>
+  .closing { text-align: center; padding-block: clamp(4rem,9vh,6.5rem); }
+  .closing__icon { position: relative; width: min(100%, 36rem); aspect-ratio: 1.5; margin: 0 auto 2.5rem; }
+  img { position: absolute; width: 52%; height: auto; left: 24%; top: 24%; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+  [data-icon-mode="3d"] canvas { opacity: 1; }
+  [data-icon-mode="3d"] img { visibility: hidden; }
+  p { margin: 0; font: 700 clamp(2.5rem,7.5vw,7rem)/.96 var(--font-display); letter-spacing: -.025em; text-transform: uppercase; color: var(--text-strong); }
+  @media(max-width: 767px) { .closing__icon { max-width: 24rem; margin-bottom: 2rem; } }
+</style>
