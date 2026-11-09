@@ -1,0 +1,21 @@
+---
+import { Icon } from 'astro-icon/components';
+import { landingCopy } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+const copy = landingCopy[getLangFromUrl(Astro.url)].faq;
+---
+<section class="section faq" id="faq"><div class="shell faq__inner">
+  <h2 data-reveal>{copy.title}</h2>
+  <div>{copy.items.map(item => <details data-reveal><summary>{item.q}<Icon name="ph:plus-light" /></summary><p>{item.a}</p></details>)}</div>
+</div></section>
+<style>
+  .faq__inner { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(2rem,5vw,5rem); }
+  h2 { font-weight: 700; max-width: 12ch; font-size: clamp(2.5rem,5vw,4.5rem); margin: 0; }
+  details { border-bottom: 1px solid var(--line); }
+  summary { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; list-style: none; cursor: pointer; color: var(--text-strong); padding-block: 1.5rem; font-size: clamp(1rem,1.35vw,1.15rem); }
+  summary::-webkit-details-marker { display: none; }
+  summary :global(svg) { width: 1.25rem; height: 1.25rem; flex: 0 0 auto; color: var(--accent-text); }
+  details[open] summary :global(svg) { transform: rotate(45deg); }
+  details p { max-width: 58ch; margin: 0 0 1.5rem; font-size: .95rem; }
+  @media(max-width: 767px) { .faq__inner { grid-template-columns: 1fr; } h2 { max-width: 18ch; } }
+</style>

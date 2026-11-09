@@ -1,0 +1,44 @@
+---
+import { Icon } from 'astro-icon/components';
+import { landingCopy } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+import ActionPair from './ActionPair.astro';
+const lang = getLangFromUrl(Astro.url);
+const copy = landingCopy[lang].signature;
+---
+<section class="section signature" id="signature">
+  <div class="shell">
+    <header data-reveal><h2>{copy.title}</h2><p class="intro">{copy.intro}</p></header>
+    <div class="signature__engine">
+      <div class="signature__overview" data-reveal>
+        <p class="statement">{copy.body}</p>
+        <ul class="terms">{copy.terms.map(term => <li>{term}</li>)}</ul>
+        <p class="delivery">{copy.delivery}</p>
+        <ActionPair lang={lang} />
+      </div>
+      <ol class="pieces" aria-label={copy.intro}>
+        {copy.pieces.map((piece,i) => <li data-reveal style={`--reveal-delay: ${i*80}ms`}>
+          <Icon name={`ph:${piece.icon}-light`} />
+          <div><h3>{piece.title}</h3><p>{piece.body}</p></div>
+        </li>)}
+      </ol>
+    </div>
+  </div>
+</section>
+<style>
+  .signature { border-top: 1px solid var(--line-wine); }
+  h2 { font-size: clamp(3rem, 7.5vw, 6.5rem); font-weight: 700; margin: 0; letter-spacing: -.025em; }
+  .intro { margin: 1rem 0 3rem; font-size: clamp(1.15rem, 2vw, 1.5rem); color: var(--accent-text); }
+  .signature__engine { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(2rem,6vw,6rem); }
+  .statement { font-size: clamp(1.25rem, 2.2vw, 1.85rem); color: var(--text-strong); line-height: 1.4; margin: 0 0 2rem; max-width: 28ch; }
+  .terms { padding: 0; margin: 0 0 1.5rem; list-style: none; display: grid; gap: .75rem; color: var(--text-strong); font-size: .875rem; }
+  .terms li { border-left: 2px solid var(--wine); padding-left: 1rem; }
+  .delivery { max-width: 42ch; margin: 0 0 2rem; font-size: .875rem; }
+  .pieces { margin: 0; padding: 0 2rem; list-style: none; background: var(--bg-raised); border: 1px solid var(--line-wine); }
+  .pieces li { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding-block: 2.5rem; }
+  .pieces li+li { border-top: 1px solid var(--line); }
+  .pieces :global(svg) { width: 2.5rem; height: 2.5rem; color: var(--accent-text); }
+  h3 { font-size: clamp(1.5rem,2.2vw,2rem); font-weight: 700; line-height: 1; margin: 0 0 .75rem; }
+  .pieces p { max-width: 38ch; margin: 0; font-size: .95rem; }
+  @media(max-width: 767px) { .signature__engine { grid-template-columns: 1fr; } .statement { max-width: 34ch; } .pieces { padding-inline: 1.5rem; } .pieces li { gap: 1rem; padding-block: 2rem; } }
+</style>
