@@ -8,6 +8,7 @@ import WhatsAppCta from './WhatsAppCta.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const home = lang === 'es' ? '/' : '/en/';
 ---
 
 <div data-nav-sentinel aria-hidden="true"></div>
@@ -19,7 +20,7 @@ const t = useTranslations(lang);
     <nav class="nav__links" aria-label={t('nav.sections')}>
       {
         NAV_ITEMS.map((item) => (
-          <a class="nav__link" href={`#${item.id}`}>
+          <a class="nav__link" href={`${home}#${item.id}`}>
             {item.label[lang]}
           </a>
         ))
@@ -30,6 +31,13 @@ const t = useTranslations(lang);
       <LangToggle lang={lang} />
       <ThemeToggle lang={lang} />
       <WhatsAppCta lang={lang} size="sm" compact />
+      <details class="nav__mobile">
+        <summary aria-label={lang === 'es' ? 'Abrir menú' : 'Open menu'}><span aria-hidden="true">☰</span></summary>
+        <nav aria-label={t('nav.sections')}>
+          {NAV_ITEMS.map(item => <a href={`${home}#${item.id}`}>{item.label[lang]}</a>)}
+          <a href={`${home}#cuestionario`}>{lang === 'es' ? 'Cuéntanos tu proyecto' : 'Tell us about your project'}</a>
+        </nav>
+      </details>
     </div>
   </div>
 </header>
@@ -45,6 +53,9 @@ const t = useTranslations(lang);
     );
     io.observe(sentinel);
   }
+  document.querySelectorAll('.nav__mobile a').forEach(a => a.addEventListener('click', () => {
+    document.querySelector('.nav__mobile')?.removeAttribute('open');
+  }));
 </script>
 
 <style>
@@ -93,7 +104,7 @@ const t = useTranslations(lang);
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--text-dim);
+    color: var(--text);
     transition: color 0.2s var(--ease-brand);
   }
 
@@ -108,6 +119,7 @@ const t = useTranslations(lang);
   }
 
   @media (min-width: 900px) {
+    .nav__mobile { display: none; }
     .nav {
       height: 68px;
     }
@@ -120,4 +132,8 @@ const t = useTranslations(lang);
       gap: 0.6rem;
     }
   }
+  .nav { background-color: color-mix(in srgb, var(--bg) 80%, transparent); }
+  .nav__mobile summary { cursor: pointer; list-style: none; color: var(--text-strong); padding: .5rem; font-size: 1.25rem; }
+  .nav__mobile summary::-webkit-details-marker { display: none; }
+  .nav__mobile nav { position: absolute; top: 64px; left: 0; right: 0; padding: 1.5rem; background: var(--bg); border-bottom: 1px solid var(--line); display: grid; gap: 1.25rem; }
 </style>

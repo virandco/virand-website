@@ -1,4 +1,5 @@
 import { ui, defaultLang, type Lang, type UIKey } from './ui';
+import { ROUTES, type RouteKey } from '../consts';
 
 /** Read the active language from the URL (`/` = es, `/en/...` = en). */
 export function getLangFromUrl(url: URL): Lang {
@@ -27,4 +28,13 @@ export function localizedPath(path: string, lang: Lang): string {
   const clean = path.startsWith('/') ? path : `/${path}`;
   if (lang === defaultLang) return clean;
   return clean === '/' ? `/${lang}/` : `/${lang}${clean}`;
+}
+
+export function routePath(key: RouteKey, lang: Lang): string {
+  return localizedPath(ROUTES[key][lang], lang);
+}
+export function getRouteKey(url: URL): RouteKey | undefined {
+  const path = url.pathname.replace(/\/+$/, '') || '/';
+  return (Object.keys(ROUTES) as RouteKey[]).find(key =>
+    (['es', 'en'] as const).some(lang => (routePath(key, lang).replace(/\/+$/, '') || '/') === path));
 }

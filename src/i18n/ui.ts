@@ -23,7 +23,7 @@ export const ui = {
     'a11y.langToggle': 'Cambiar idioma',
     'a11y.home': 'VIRAND, inicio',
 
-    'nav.cta': 'Hablemos',
+    'nav.cta': 'WhatsApp',
     'nav.sections': 'Secciones',
 
     'hero.eyebrow': 'Estudio creativo',
@@ -113,7 +113,7 @@ export const ui = {
     'a11y.langToggle': 'Change language',
     'a11y.home': 'VIRAND, home',
 
-    'nav.cta': "Let's talk",
+    'nav.cta': 'WhatsApp',
     'nav.sections': 'Sections',
 
     'hero.eyebrow': 'Creative studio',

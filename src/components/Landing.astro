@@ -1,0 +1,12 @@
+---
+import Hero from './Hero.astro';
+import Footer from './Footer.astro';
+import { getLangFromUrl } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const headings = lang === 'es' ? ['Signature System', 'Cómo trabajamos', 'Servicios a medida', 'Preguntas frecuentes', 'Cuéntanos tu proyecto'] : ['Signature System', 'How we work', 'Custom services', 'Frequently asked questions', 'Tell us about your project'];
+---
+<main id="main">
+  <Hero />
+  {['signature','proceso','a-medida','faq','cuestionario'].map((id,i) => <section id={id} class="section shell"><h2>{headings[i]}</h2></section>)}
+</main>
+<Footer />

@@ -1,5 +1,5 @@
 ---
-import { otherLang, localizedPath, useTranslations } from '../i18n/utils';
+import { otherLang, getRouteKey, routePath, useTranslations } from '../i18n/utils';
 import type { Lang } from '../i18n/ui';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const target = otherLang(lang);
-const href = localizedPath('/', target);
+const href = routePath(getRouteKey(Astro.url) ?? 'home', target);
 ---
 
 <a class="lang-toggle" href={href} hreflang={target} aria-label={t('a11y.langToggle')}>

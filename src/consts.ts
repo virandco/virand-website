@@ -1,27 +1,22 @@
-// Site-wide constants. Single source of truth for structural data.
-
-export const SITE = {
-  name: 'VIRAND',
-  domain: 'virand.co',
+export const SITE = { name: 'VIRAND', domain: 'virand.co' } as const;
+export const WHATSAPP_NUMBER = '573228802540';
+export const WHATSAPP = { isProvisional: false, url: 'https://wa.me/573228802540' } as const;
+export const CONTACT_EMAIL = 'contacto@virand.co';
+export const UMAMI_WEBSITE_ID = '7acebee5-620e-4e8d-a055-22f025bc3018';
+export const CALENDAR_BOOKING_URL = 'https://calendar.app.google/Uxfopn8jZcti3CKs7';
+export const CALENDAR_EMBED_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0VdipIduBeeh9cx7VfxPLSBrwpSQxmDPODKbOeXyRjN0z7u5IQA7v4KOUUpZSajXzN3hni26qP?gv=true';
+export const ROUTES = {
+  home: { es: '/', en: '/' },
+  privacy: { es: '/privacidad', en: '/privacy' },
+  terms: { es: '/terminos', en: '/terms' },
+  cookies: { es: '/cookies', en: '/cookies' },
+  notFound: { es: '/404', en: '/404' },
 } as const;
-
-/**
- * WhatsApp CTA target.
- * PROVISIONAL: no real number yet. `isProvisional` lets the button render a
- * disabled/placeholder state instead of a live link. Replace `url` and flip
- * the flag when the real line exists.
- */
-export const WHATSAPP = {
-  isProvisional: true,
-  url: '#contacto',
-  // Example of the final shape:
-  // url: 'https://wa.me/57XXXXXXXXXX?text=Hola%20VIRAND',
-} as const;
-
-/** In-page nav. `id` must match a section's DOM id. */
+export type RouteKey = keyof typeof ROUTES;
+export const NOINDEX_ROUTES: readonly RouteKey[] = ['privacy', 'terms', 'cookies', 'notFound'];
 export const NAV_ITEMS = [
-  { id: 'manifiesto', label: { es: 'Manifiesto', en: 'Manifesto' } },
-  { id: 'servicios', label: { es: 'Servicios', en: 'Services' } },
+  { id: 'signature', label: { es: 'Signature System', en: 'Signature System' } },
   { id: 'proceso', label: { es: 'Proceso', en: 'Process' } },
-  { id: 'contacto', label: { es: 'Contacto', en: 'Contact' } },
+  { id: 'a-medida', label: { es: 'A medida', en: 'Custom work' } },
+  { id: 'faq', label: { es: 'FAQ', en: 'FAQ' } },
 ] as const;
