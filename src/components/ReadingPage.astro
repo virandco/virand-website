@@ -1,0 +1,101 @@
+---
+interface Block {
+  kind: string;
+  html?: string;
+  items?: readonly string[];
+}
+interface Props {
+  content: {
+    title: string;
+    notice: string;
+    sections: ReadonlyArray<{ title: string; blocks: readonly Block[] }>;
+  };
+}
+const { content } = Astro.props;
+const sections = content.sections.map((section, index) => {
+  const blocks = [...section.blocks];
+  let title = section.title;
+  // Intro and CTA are editorial labels, not headings for visitors.
+  if (title === 'Intro' || title === 'CTA') {
+    title = blocks[0]?.kind === 'heading' ? blocks.shift()?.html ?? '' : '';
+  }
+  return { title, blocks, id: `contenido-${index + 1}` };
+});
+const contents = sections.filter(section => section.title);
+---
+
+<article class="project-page">
+  <div class="project-page__inner shell">
+    <header class="project-header">
+      <h1 class="project-header__title">{content.title}</h1>
+      {content.notice && <p class="project-header__intro">{content.notice}</p>}
+    </header>
+    {content.notice && contents.length >= 5 && (
+      <nav aria-label={content.title} class="manifesto__body">
+        <ul>{contents.map(section => <li><a href={`#${section.id}`}>{section.title}</a></li>)}</ul>
+      </nav>
+    )}
+    {sections.map(section => (
+      <section id={section.id} class="section">
+        {section.title && <h2 class="pillar__name">{section.title}</h2>}
+        <div class="manifesto__body">
+          {section.blocks.map(block => block.kind === 'heading'
+            ? <h3 class="process__name" set:html={block.html} />
+            : block.kind === 'list'
+              ? <ul>{block.items?.map(item => <li set:html={item} />)}</ul>
+              : <p set:html={block.html} />)}
+        </div>
+      </section>
+    ))}
+  </div>
+</article>
+
+<style>
+  .project-page {
+    position: relative;
+    padding-block: clamp(6.5rem, 16vh, 9.5rem) clamp(5rem, 12vh, 8rem);
+  }
+  .project-page__inner {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+  .project-header { margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+  .project-header__title {
+    margin: 0;
+    font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .project-header__intro {
+    margin: 1.25rem 0 0;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .section { padding-block: clamp(1.75rem, 4vw, 2.75rem); }
+  .pillar__name {
+    margin: 0 0 1rem;
+    font-size: clamp(1.85rem, 4.2vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--text-strong);
+  }
+  .manifesto__body {
+    display: grid;
+    gap: 1.4rem;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.62;
+    color: var(--text);
+  }
+  .manifesto__body :global(p), .manifesto__body :global(ul) { margin: 0; }
+  .manifesto__body :global(ul) { padding-left: 1.5rem; list-style: disc; }
+  .manifesto__body :global(a) { text-decoration: underline; text-underline-offset: 3px; }
+  .manifesto__body :global(a:hover) { color: var(--accent-text); }
+  .process__name {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+    line-height: 1;
+  }
+</style>

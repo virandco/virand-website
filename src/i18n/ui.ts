@@ -558,3 +558,691 @@ export const questionnaireCopy = {
     "nojs": "You can fill in the fields and submit the form. You can also contact us on WhatsApp."
   }
 } as const;
+
+export const round2LegalCopy = {
+  "es": {
+    "privacy": {
+      "title": "Política de privacidad",
+      "notice": "Última actualización: noviembre de 2026. Versión 1.0.",
+      "sections": [
+        {
+          "title": "Responsable",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Andrés Virgües Fajardo, persona natural y titular de la marca VIRAND, es el responsable del tratamiento de los datos descritos aquí. VIRAND es una marca, no una empresa constituida."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El canal de contacto y para ejercer tus derechos es <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Datos que recibimos",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Al enviar el formulario recibimos tu nombre, tipo de negocio, estado de la marca, servicios de interés, presupuesto aproximado, WhatsApp o correo, tu mensaje y la indicación de consentimiento. El formulario también envía el idioma y datos técnicos para prevenir envíos automatizados."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El servidor utiliza la dirección IP y datos temporales de la solicitud para limitar abusos. Los contadores de límite de envíos son temporales y se mantienen en memoria."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Si escribes por correo o WhatsApp, recibimos los datos de contacto y el contenido que decidas compartir en esa conversación."
+            }
+          ]
+        },
+        {
+          "title": "Finalidad y autorización",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Usamos los datos para atender tu solicitud, entender el proyecto, responder por el canal de contacto facilitado, coordinar una llamada, contactarte sobre nuestros servicios, gestionar la relación comercial y medir y mejorar el sitio (ver «Analítica del sitio»). La reserva de una llamada se ofrece después de enviar el formulario."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El formulario requiere que marques la autorización de tratamiento antes de enviarlo. También puedes contactar por <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Formulario y proveedores",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El formulario se envía a la ruta de servidor del sitio. Tras validarlo, los datos y la indicación de consentimiento se envían a Resend, proveedor de correo en EE. UU., que entrega el mensaje a <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Vercel, proveedor de alojamiento de EE. UU., aloja el sitio y ejecuta la ruta del formulario. El sitio no guarda las solicitudes en una base de datos propia ni tiene un agente de atención conectado en esta fase."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El mensaje queda en el correo de contacto y se atiende mediante ese canal. Resend y Vercel intervienen en la transmisión y el alojamiento según sus propios servicios y políticas."
+            }
+          ]
+        },
+        {
+          "title": "Analítica del sitio",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El servicio de analítica del sitio es Umami Cloud, operado por Umami Software, Inc. Cuando está activado, el sitio mide visitas, clics en botones, inicio y finalización del cuestionario, envío del formulario y visualización de la agenda como eventos. Solo se envían categorías fijas, sin respuestas del cuestionario, nombre, contacto ni contenido del mensaje."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El sitio no está configurado para instalar cookies de analítica. Según la <a href=\"https://umami.is/docs/faq\">documentación de Umami</a>, su rastreador no requiere cookies."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Según la <a href=\"https://umami.is/privacy\">política de Umami</a>, el proveedor procesa brevemente datos técnicos de conexión, como la IP, para entregar solicitudes, calcular identificadores de visitante y estimar la ubicación aproximada. La IP no se guarda como campo de los registros de analítica estándar. La misma política distingue esos registros de los registros operativos y de seguridad, que pueden incluir direcciones IP."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El sitio respeta la señal Do Not Track del navegador para desactivar el seguimiento de Umami cuando el navegador comunica esa preferencia. Esto no equivale a impedir todas las solicitudes HTTP ni los registros técnicos de los proveedores."
+            }
+          ]
+        },
+        {
+          "title": "Preferencia de tema y reserva",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El código propio del sitio solo guarda en el navegador la preferencia de tema claro u oscuro, mediante localStorage con la clave virand-theme. No escribe cookies propias ni usa sessionStorage."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Después de enviar el formulario, la opción de reserva puede mostrar una agenda incrustada de Google Calendar cuando esté habilitada. Al cargar la agenda, Google puede usar sus propias cookies y tratar datos de conexión. El sitio no controla esas cookies. Consulta las <a href=\"https://policies.google.com/privacy\">políticas de Google</a> y la <a href=\"/cookies/\">política de cookies del sitio</a>."
+            }
+          ]
+        },
+        {
+          "title": "Proveedores y visitantes de otros países",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El alojamiento y el envío de correo utilizan los servicios de Vercel y Resend descritos, proveedores de EE. UU. Umami Cloud es el servicio de analítica descrito en esta política. Estos servicios pueden implicar tratamiento de información fuera de Colombia o de tu país de residencia."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Si visitas el sitio desde otro país, tu solicitud se trata mediante el mismo flujo. Las políticas de los proveedores explican sus propios tratamientos: <a href=\"https://resend.com/legal/privacy-policy\">Resend</a>, <a href=\"https://vercel.com/legal/privacy-policy\">Vercel</a> y <a href=\"https://umami.is/privacy\">Umami</a>."
+            }
+          ]
+        },
+        {
+          "title": "Conservación",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Conservamos los datos mientras sean necesarios para atender la solicitud y la relación comercial, y hasta que el titular pida su eliminación. Si solicitas eliminarlos, revisamos si existe una obligación legal que exija conservar alguna información y te explicamos lo que corresponda."
+            }
+          ]
+        },
+        {
+          "title": "Derechos y contacto",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Puedes solicitar acceso, actualización o corrección de tus datos, información sobre su uso, prueba de la autorización, y la eliminación o revocación del consentimiento cuando corresponda conforme a la ley."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Escribe a <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a> e indica qué solicitud quieres realizar. Si hace falta verificar tu identidad para atenderla, se te pedirá la información necesaria por ese canal, sin publicarla en el sitio."
+            }
+          ]
+        },
+        {
+          "title": "Marco y cambios",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Esta política toma como referencia la Ley 1581 de 2012 y las normas que la reglamentan en Colombia."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Los cambios en este texto se publicarán en esta página con su fecha y versión."
+            }
+          ]
+        }
+      ],
+      "description": "Conoce qué datos recibe VIRAND, cómo se usan en el formulario, qué proveedores intervienen y cómo ejercer tus derechos de privacidad."
+    },
+    "terms": {
+      "title": "Términos de uso",
+      "notice": "Última actualización: noviembre de 2026. Versión 1.0.",
+      "sections": [
+        {
+          "title": "Responsable y contacto",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El sitio es operado por Andrés Virgües Fajardo, persona natural y titular de la marca VIRAND. VIRAND es una marca, no una empresa constituida. Contacto: <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Uso informativo del sitio",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El sitio presenta servicios y permite enviar consultas sobre proyectos. Su contenido es informativo; enviar el formulario no constituye por sí solo un acuerdo de prestación de servicios."
+            }
+          ]
+        },
+        {
+          "title": "Servicios y acuerdo aparte",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Cada servicio se rige por un acuerdo aparte entre el cliente y Andrés Virgües Fajardo. El alcance, los entregables y las condiciones de ejecución se confirman en ese acuerdo antes de empezar."
+            }
+          ]
+        },
+        {
+          "title": "Marca y contenido",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "La marca VIRAND, su logotipo y la firma Build Perception pertenecen a Andrés Virgües Fajardo. El contenido del sitio pertenece a su titular o a los terceros que correspondan."
+            },
+            {
+              "kind": "paragraph",
+              "html": "La publicación de ese contenido no concede por sí sola permiso para reutilizarlo, sin perjuicio de los usos permitidos por la ley."
+            }
+          ]
+        },
+        {
+          "title": "Resultados y responsabilidad",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "No se garantizan ventas, tráfico, conversiones ni otros resultados concretos derivados de los servicios descritos. Los resultados dependen de factores que pueden quedar fuera del alcance acordado."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El funcionamiento del sitio y de servicios externos puede verse afectado por interrupciones o cambios de esos proveedores. Esto no excluye de forma absoluta la responsabilidad que corresponda conforme a la ley ni limita derechos que no puedan renunciarse."
+            }
+          ]
+        },
+        {
+          "title": "Datos y servicios externos",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El tratamiento de la información enviada se describe en la <a href=\"/privacidad/\">política de privacidad</a>. La preferencia de tema, la analítica y la posible agenda de Google se explican en la <a href=\"/cookies/\">política de cookies</a>."
+            }
+          ]
+        },
+        {
+          "title": "Ley aplicable y cambios",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Estos términos se interpretan conforme a la ley de Colombia."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Las actualizaciones de este texto se publicarán en esta página con su fecha y versión."
+            }
+          ]
+        }
+      ],
+      "description": "Consulta las condiciones de uso del sitio VIRAND, la titularidad de la marca, los acuerdos de servicios y los límites de responsabilidad."
+    },
+    "cookies": {
+      "title": "Política de cookies",
+      "notice": "Última actualización: noviembre de 2026. Versión 1.0.",
+      "sections": [
+        {
+          "title": "Responsable y contacto",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Andrés Virgües Fajardo, persona natural y titular de la marca VIRAND, opera este sitio. VIRAND es una marca, no una empresa constituida. Contacto: <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Preferencia de tema",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El código propio del sitio guarda únicamente tu elección de tema claro u oscuro en localStorage con la clave virand-theme. Esa preferencia permite mantener el tema en las siguientes visitas."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El código propio no escribe cookies ni utiliza sessionStorage. Puedes borrar la preferencia desde los ajustes de almacenamiento de tu navegador; al hacerlo, el sitio vuelve a su tema predeterminado."
+            }
+          ]
+        },
+        {
+          "title": "Umami Cloud",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "El servicio de analítica del sitio es Umami Cloud, operado por Umami Software, Inc. Cuando está activado, el sitio mide visitas, clics en botones, inicio y finalización del cuestionario, envío del formulario y visualización de la agenda como eventos. Solo se envían categorías fijas, sin respuestas del cuestionario, nombre, contacto ni contenido del mensaje."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El sitio no está configurado para instalar cookies de analítica. Según la <a href=\"https://umami.is/docs/faq\">documentación de Umami</a>, su rastreador no requiere cookies."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Según la <a href=\"https://umami.is/privacy\">política de Umami</a>, el proveedor procesa brevemente datos técnicos de conexión, como la IP, para entregar solicitudes, calcular identificadores de visitante y estimar la ubicación aproximada. La IP no se guarda como campo de los registros de analítica estándar. La misma política distingue esos registros de los registros operativos y de seguridad, que pueden incluir direcciones IP."
+            },
+            {
+              "kind": "paragraph",
+              "html": "El sitio respeta la señal Do Not Track del navegador para desactivar el seguimiento de Umami cuando el navegador comunica esa preferencia. Esto no equivale a impedir todas las solicitudes HTTP ni los registros técnicos de los proveedores."
+            }
+          ]
+        },
+        {
+          "title": "Google Calendar después del formulario",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Después de enviar el formulario, la opción de reserva puede mostrar una agenda incrustada de Google Calendar cuando esté habilitada. Esa agenda es un servicio externo."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Cuando se carga, Google puede usar sus propias cookies y tratar datos de conexión según sus políticas. El sitio no controla esas cookies. Consulta <a href=\"https://policies.google.com/technologies/cookies\">cómo usa Google las cookies</a> y sus <a href=\"https://policies.google.com/privacy\">políticas de privacidad</a>."
+            }
+          ]
+        },
+        {
+          "title": "Tus opciones e información adicional",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Puedes revisar o borrar el almacenamiento y gestionar las cookies de terceros mediante las opciones de tu navegador. Las restricciones que establezcas pueden afectar a funciones de la agenda de Google."
+            },
+            {
+              "kind": "paragraph",
+              "html": "La información sobre el formulario, los proveedores y tus derechos está en la <a href=\"/privacidad/\">política de privacidad</a>. Para consultas, escribe a <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Cambios",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Si cambian las herramientas o el almacenamiento utilizados por el sitio, este texto se actualizará con su fecha y versión."
+            }
+          ]
+        }
+      ],
+      "description": "Consulta la preferencia de tema, la analítica con Umami Cloud y Do Not Track, y las posibles cookies de la agenda de Google Calendar."
+    }
+  },
+  "en": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "notice": "Last updated: November 2026. Version 1.0.",
+      "sections": [
+        {
+          "title": "Controller",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Andrés Virgües Fajardo, an individual and the owner of the VIRAND brand, is responsible for the data processing described here. VIRAND is a brand, not an incorporated company."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The contact channel for questions and exercising your rights is <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Data we receive",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "When you submit the form, we receive your name, business type, brand status, services of interest, approximate budget, WhatsApp number or email, your message and the indication of consent. The form also sends the language and technical data to help prevent automated submissions."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The server uses the IP address and temporary request data to limit abuse. Submission limit counters are temporary and held in memory."
+            },
+            {
+              "kind": "paragraph",
+              "html": "If you contact us by email or WhatsApp, we receive the contact details and content you choose to share in that conversation."
+            }
+          ]
+        },
+        {
+          "title": "Purpose and authorization",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "We use the data to handle your request, understand the project, respond through the contact channel you provided, schedule a call, follow up with you about our services, manage the commercial relationship and measure and improve the site (see “Site analytics”). Call booking is offered after form submission."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The form requires you to select the data processing authorization before submitting it. You may also contact <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Form and providers",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The form is sent to the site’s server route. After validation, the data and indication of consent are sent to Resend, an email provider in the US, which delivers the message to <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Vercel, a hosting provider in the US, hosts the site and runs the form route. At this stage, the site does not store requests in its own database or have a connected customer service agent."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The message remains in the contact inbox and is handled through that channel. Resend and Vercel are involved in transmission and hosting under their own services and policies."
+            }
+          ]
+        },
+        {
+          "title": "Site analytics",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The site’s analytics service is Umami Cloud, operated by Umami Software, Inc. When enabled, the site measures visits, button clicks, questionnaire starts and completions, form submissions and calendar views as events. Only fixed categories are sent, without questionnaire answers, names, contact details or message content."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The site is not configured to install analytics cookies. According to <a href=\"https://umami.is/docs/faq\">Umami’s documentation</a>, its tracker does not require cookies."
+            },
+            {
+              "kind": "paragraph",
+              "html": "According to <a href=\"https://umami.is/privacy\">Umami’s policy</a>, the provider briefly processes technical connection data, such as IP addresses, to deliver requests, calculate visitor identifiers and estimate approximate location. IP addresses are not stored as fields in standard analytics records. The same policy distinguishes those records from operational and security logs, which may include IP addresses."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The site respects the browser’s Do Not Track signal by disabling Umami tracking when the browser communicates that preference. This does not mean preventing all HTTP requests or providers’ technical logs."
+            }
+          ]
+        },
+        {
+          "title": "Theme preference and booking",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The site’s own code stores only the light or dark theme preference in the browser, using localStorage under the virand-theme key. It does not write its own cookies or use sessionStorage."
+            },
+            {
+              "kind": "paragraph",
+              "html": "After form submission, the booking option may display an embedded Google Calendar when enabled. When the calendar loads, Google may use its own cookies and process connection data. The site does not control those cookies. See <a href=\"https://policies.google.com/privacy\">Google’s policies</a> and the <a href=\"/en/cookies/\">site’s cookie policy</a>."
+            }
+          ]
+        },
+        {
+          "title": "Providers and visitors in other countries",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Hosting and email delivery use the Vercel and Resend services described above, which are US providers. Umami Cloud is the analytics service described in this policy. These services may involve processing information outside Colombia or your country of residence."
+            },
+            {
+              "kind": "paragraph",
+              "html": "If you visit from another country, your request is handled through the same flow. The providers’ policies explain their own processing: <a href=\"https://resend.com/legal/privacy-policy\">Resend</a>, <a href=\"https://vercel.com/legal/privacy-policy\">Vercel</a> and <a href=\"https://umami.is/privacy\">Umami</a>."
+            }
+          ]
+        },
+        {
+          "title": "Retention",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "We retain the data while it is needed to handle the request and the commercial relationship, and until the data subject requests deletion. If you request deletion, we check whether a legal obligation requires any information to be kept and explain what applies."
+            }
+          ]
+        },
+        {
+          "title": "Rights and contact",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "You may request access to, updates or corrections to your data, information about its use, proof of authorization, and deletion or withdrawal of consent where applicable under the law."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Write to <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a> and explain your request. If identity verification is needed to handle it, the necessary information will be requested through that channel, without publishing it on the site."
+            }
+          ]
+        },
+        {
+          "title": "Framework and changes",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "This policy refers to Colombian Law 1581 of 2012 and its implementing regulations."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Changes to this text will be published on this page with their date and version."
+            }
+          ]
+        }
+      ],
+      "description": "Learn what data VIRAND receives, how the project form uses it, which providers are involved and how to exercise your privacy rights."
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "notice": "Last updated: November 2026. Version 1.0.",
+      "sections": [
+        {
+          "title": "Operator and contact",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The site is operated by Andrés Virgües Fajardo, an individual and the owner of the VIRAND brand. VIRAND is a brand, not an incorporated company. Contact: <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Informational use of the site",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The site presents services and lets you send project inquiries. Its content is informational; submitting the form does not by itself create a service agreement."
+            }
+          ]
+        },
+        {
+          "title": "Services and separate agreement",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Each service is governed by a separate agreement between the client and Andrés Virgües Fajardo. Scope, deliverables and implementation terms are confirmed in that agreement before work starts."
+            }
+          ]
+        },
+        {
+          "title": "Brand and content",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The VIRAND brand, its logo and the Build Perception signature belong to Andrés Virgües Fajardo. Site content belongs to its owner or the relevant third parties."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Publishing that content does not by itself grant permission to reuse it, without prejudice to uses permitted by law."
+            }
+          ]
+        },
+        {
+          "title": "Results and responsibility",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "No specific sales, traffic, conversions or other results are guaranteed from the services described. Results depend on factors that may fall outside the agreed scope."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The operation of the site and external services may be affected by interruptions or changes by those providers. This does not absolutely exclude liability that applies under the law or limit rights that cannot be waived."
+            }
+          ]
+        },
+        {
+          "title": "Data and external services",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The processing of submitted information is described in the <a href=\"/en/privacy/\">Privacy Policy</a>. Theme preference, analytics and the possible Google calendar are explained in the <a href=\"/en/cookies/\">Cookie Policy</a>."
+            }
+          ]
+        },
+        {
+          "title": "Applicable law and changes",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "These terms are interpreted under Colombian law."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Updates to this text will be published on this page with their date and version."
+            }
+          ]
+        }
+      ],
+      "description": "Read the terms for using the VIRAND website, including brand and content ownership, separate service agreements and responsibility."
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "notice": "Last updated: November 2026. Version 1.0.",
+      "sections": [
+        {
+          "title": "Operator and contact",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "Andrés Virgües Fajardo, an individual and the owner of the VIRAND brand, operates this site. VIRAND is a brand, not an incorporated company. Contact: <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Theme preference",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The site’s own code stores only your choice of light or dark theme in localStorage under the virand-theme key. This preference keeps the selected theme for later visits."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The site’s own code does not write cookies or use sessionStorage. You can remove the preference through your browser’s storage settings; doing so returns the site to its default theme."
+            }
+          ]
+        },
+        {
+          "title": "Umami Cloud",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "The site’s analytics service is Umami Cloud, operated by Umami Software, Inc. When enabled, the site measures visits, button clicks, questionnaire starts and completions, form submissions and calendar views as events. Only fixed categories are sent, without questionnaire answers, names, contact details or message content."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The site is not configured to install analytics cookies. According to <a href=\"https://umami.is/docs/faq\">Umami’s documentation</a>, its tracker does not require cookies."
+            },
+            {
+              "kind": "paragraph",
+              "html": "According to <a href=\"https://umami.is/privacy\">Umami’s policy</a>, the provider briefly processes technical connection data, such as IP addresses, to deliver requests, calculate visitor identifiers and estimate approximate location. IP addresses are not stored as fields in standard analytics records. The same policy distinguishes those records from operational and security logs, which may include IP addresses."
+            },
+            {
+              "kind": "paragraph",
+              "html": "The site respects the browser’s Do Not Track signal by disabling Umami tracking when the browser communicates that preference. This does not mean preventing all HTTP requests or providers’ technical logs."
+            }
+          ]
+        },
+        {
+          "title": "Google Calendar after the form",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "After form submission, the booking option may display an embedded Google Calendar when enabled. That calendar is an external service."
+            },
+            {
+              "kind": "paragraph",
+              "html": "When it loads, Google may use its own cookies and process connection data under its policies. The site does not control those cookies. See <a href=\"https://policies.google.com/technologies/cookies\">how Google uses cookies</a> and its <a href=\"https://policies.google.com/privacy\">privacy policies</a>."
+            }
+          ]
+        },
+        {
+          "title": "Your choices and further information",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "You can review or remove storage and manage third-party cookies through your browser settings. Restrictions you set may affect Google calendar functions."
+            },
+            {
+              "kind": "paragraph",
+              "html": "Information about the form, providers and your rights is in the <a href=\"/en/privacy/\">Privacy Policy</a>. For questions, write to <a href=\"mailto:contacto@virand.co\">contacto@virand.co</a>."
+            }
+          ]
+        },
+        {
+          "title": "Changes",
+          "blocks": [
+            {
+              "kind": "paragraph",
+              "html": "If the tools or storage used by the site change, this text will be updated with its date and version."
+            }
+          ]
+        }
+      ],
+      "description": "Read about theme storage, Umami Cloud analytics and Do Not Track, and the possible cookies used by the Google Calendar booking embed."
+    }
+  }
+} as const;
+
+export const round2NotFoundCopy = {
+  "es": {
+    "title": "Esta página no existe.",
+    "notice": "",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "html": "Vuelve al inicio o cuéntanos qué buscabas."
+          },
+          {
+            "kind": "paragraph",
+            "html": "<a href=\"/\">Ir al inicio</a>"
+          },
+          {
+            "kind": "paragraph",
+            "html": "<a href=\"/#cuestionario\">Cuéntanos tu proyecto</a>"
+          }
+        ]
+      }
+    ]
+  },
+  "en": {
+    "title": "This page does not exist.",
+    "notice": "",
+    "sections": [
+      {
+        "title": "",
+        "blocks": [
+          {
+            "kind": "paragraph",
+            "html": "Go back to the home page or tell us what you were looking for."
+          },
+          {
+            "kind": "paragraph",
+            "html": "<a href=\"/en/\">Go to the home page</a>"
+          },
+          {
+            "kind": "paragraph",
+            "html": "<a href=\"/en/#cuestionario\">Tell us about your project</a>"
+          }
+        ]
+      }
+    ]
+  }
+} as const;
