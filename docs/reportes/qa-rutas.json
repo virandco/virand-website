@@ -1,0 +1,69 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "status": 200,
+      "opposite": "/en/",
+      "overflow": false
+    },
+    {
+      "route": "/en/",
+      "status": 200,
+      "opposite": "/",
+      "overflow": false
+    },
+    {
+      "route": "/privacidad",
+      "status": 200,
+      "opposite": "/en/privacy",
+      "overflow": false
+    },
+    {
+      "route": "/en/privacy",
+      "status": 200,
+      "opposite": "/privacidad",
+      "overflow": false
+    },
+    {
+      "route": "/terminos",
+      "status": 200,
+      "opposite": "/en/terms",
+      "overflow": false
+    },
+    {
+      "route": "/en/terms",
+      "status": 200,
+      "opposite": "/terminos",
+      "overflow": false
+    },
+    {
+      "route": "/cookies",
+      "status": 200,
+      "opposite": "/en/cookies",
+      "overflow": false
+    },
+    {
+      "route": "/en/cookies",
+      "status": 200,
+      "opposite": "/cookies",
+      "overflow": false
+    },
+    {
+      "route": "/404",
+      "status": 404,
+      "opposite": "/en/404",
+      "overflow": false
+    },
+    {
+      "route": "/en/404",
+      "status": 200,
+      "opposite": "/404",
+      "overflow": false
+    }
+  ],
+  "mobileNav": "OK",
+  "faq": "OK",
+  "videoFailure": "OK",
+  "noJavaScript": "OK",
+  "english404": "OK"
+}

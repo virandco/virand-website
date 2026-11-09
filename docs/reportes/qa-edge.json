@@ -1,0 +1,199 @@
+{
+  "browser": "157.0.4341.42",
+  "runs": [
+    {
+      "width": 1440,
+      "lang": "es",
+      "theme": "dark",
+      "lcp": {
+        "ms": 608,
+        "tag": "H1",
+        "url": ""
+      },
+      "video": {
+        "before": 0,
+        "after": 1.499765
+      },
+      "icon": "3d",
+      "events": [
+        "cuestionario_iniciado",
+        "cuestionario_completado",
+        "cta_whatsapp",
+        "form_enviado",
+        "agenda_vista"
+      ],
+      "csp": [],
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "theme": "dark",
+      "lcp": {
+        "ms": 144,
+        "tag": "H1",
+        "url": ""
+      },
+      "video": {
+        "before": 0,
+        "after": 1.499765
+      },
+      "icon": "3d",
+      "events": [
+        "cuestionario_iniciado",
+        "cuestionario_completado",
+        "cta_whatsapp",
+        "form_enviado",
+        "agenda_vista"
+      ],
+      "csp": [],
+      "errors": []
+    },
+    {
+      "width": 1024,
+      "lang": "es",
+      "theme": "dark",
+      "lcp": {
+        "ms": 240,
+        "tag": "H1",
+        "url": ""
+      },
+      "video": {
+        "before": 0,
+        "after": 1.499765
+      },
+      "icon": "3d",
+      "events": [
+        "cuestionario_iniciado",
+        "cuestionario_completado",
+        "cta_whatsapp",
+        "form_enviado",
+        "agenda_vista"
+      ],
+      "csp": [],
+      "errors": []
+    },
+    {
+      "width": 1024,
+      "lang": "en",
+      "theme": "dark",
+      "lcp": {
+        "ms": 184,
+        "tag": "H1",
+        "url": ""
+      },
+      "video": {
+        "before": 0,
+        "after": 1.499765
+      },
+      "icon": "3d",
+      "events": [
+        "cuestionario_iniciado",
+        "cuestionario_completado",
+        "cta_whatsapp",
+        "form_enviado",
+        "agenda_vista"
+      ],
+      "csp": [],
+      "errors": []
+    },
+    {
+      "width": 768,
+      "lang": "es",
+      "theme": "light",
+      "lcp": {
+        "ms": 180,
+        "tag": "H1",
+        "url": ""
+      },
+      "video": {
+        "before": 0,
+        "after": 1.499765
+      },
+      "icon": "3d",
+      "events": [
+        "cuestionario_iniciado",
+        "cuestionario_completado",
+        "cta_whatsapp",
+        "form_enviado",
+        "agenda_vista"
+      ],
+      "csp": [],
+      "errors": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "theme": "light",
+      "lcp": {
+        "ms": 160,
+        "tag": "H1",
+        "url": ""
+      },
+      "video": {
+        "before": 0,
+        "after": 1.499765
+      },
+      "icon": "3d",
+      "events": [
+        "cuestionario_iniciado",
+        "cuestionario_completado",
+        "cta_whatsapp",
+        "form_enviado",
+        "agenda_vista"
+      ],
+      "csp": [],
+      "errors": []
+    },
+    {
+      "width": 390,
+      "lang": "es",
+      "theme": "light",
+      "lcp": {
+        "ms": 184,
+        "tag": "H1",
+        "url": ""
+      },
+      "video": {
+        "before": 0,
+        "after": 1.499765
+      },
+      "icon": "static",
+      "events": [
+        "cuestionario_iniciado",
+        "cuestionario_completado",
+        "cta_whatsapp",
+        "form_enviado",
+        "agenda_vista"
+      ],
+      "csp": [],
+      "errors": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "theme": "light",
+      "lcp": {
+        "ms": 168,
+        "tag": "H1",
+        "url": ""
+      },
+      "video": {
+        "before": 0,
+        "after": 1.499765
+      },
+      "icon": "static",
+      "events": [
+        "cuestionario_iniciado",
+        "cuestionario_completado",
+        "cta_whatsapp",
+        "form_enviado",
+        "agenda_vista"
+      ],
+      "csp": [],
+      "errors": []
+    }
+  ],
+  "reducedMotion": "OK",
+  "noWebGL": "OK"
+}

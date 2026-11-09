@@ -1,0 +1,28 @@
+{
+    "packages":  [
+                     {
+                         "name":  "@astrojs/vercel",
+                         "severity":  "moderate"
+                     },
+                     {
+                         "name":  "@vercel/nft",
+                         "severity":  "moderate"
+                     },
+                     {
+                         "name":  "glob",
+                         "severity":  "moderate"
+                     },
+                     {
+                         "name":  "minimatch",
+                         "severity":  "moderate"
+                     }
+                 ],
+    "vulnerabilities":  {
+                            "info":  0,
+                            "low":  0,
+                            "moderate":  4,
+                            "high":  0,
+                            "critical":  0,
+                            "total":  4
+                        }
+}

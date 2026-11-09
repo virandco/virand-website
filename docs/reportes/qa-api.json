@@ -1,0 +1,37 @@
+{
+  "credentials": "Intentionally empty in this test process; no real email sent.",
+  "cases": [
+    {
+      "name": "GET",
+      "status": 405
+    },
+    {
+      "name": "origin",
+      "status": 403
+    },
+    {
+      "name": "invalid JSON",
+      "status": 400
+    },
+    {
+      "name": "validation",
+      "status": 422
+    },
+    {
+      "name": "unavailable",
+      "status": 503
+    },
+    {
+      "name": "honeypot",
+      "status": 200
+    },
+    {
+      "name": "too large",
+      "status": 413
+    },
+    {
+      "name": "unsupported",
+      "status": 415
+    }
+  ]
+}
