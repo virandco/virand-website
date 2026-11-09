@@ -1,7 +1,7 @@
 ---
 import { questionnaireCopy } from '../i18n/ui';
 import { getLangFromUrl, routePath } from '../i18n/utils';
-import { CALENDAR_BOOKING_URL, CALENDAR_EMBED_URL } from '../consts';
+import { CALENDAR_BOOKING_URL, CALENDAR_EMBED_URL, WHATSAPP } from '../consts';
 const lang=getLangFromUrl(Astro.url), copy=questionnaireCopy[lang];
 const embed=new URL(CALENDAR_EMBED_URL);
 const fallback=new URL(lang==='en'?CALENDAR_EMBED_URL:CALENDAR_BOOKING_URL);
@@ -12,8 +12,8 @@ const fields=['business','brand','needs','budget'] as const;
   <div class="questionnaire__layout">
     <header><h2 data-reveal>{copy.title}</h2><p data-reveal>{copy.intro}</p></header>
     <div class="questionnaire__panel">
-      <noscript><p>{copy.nojs}</p></noscript>
-      <form method="POST" action="/api/proyecto" novalidate data-questionnaire data-lang={lang}>
+      <noscript><p>{copy.nojs}</p><a href={WHATSAPP.url} target="_blank" rel="noopener noreferrer">WhatsApp</a></noscript>
+      <form method="POST" action="/api/proyecto" novalidate data-questionnaire data-lang={lang} hidden>
         <input type="hidden" name="lang" value={lang} />
         <input type="hidden" name="ts" value="" />
         <div class="hp" aria-hidden="true"><label for="q-website">Website</label><input id="q-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>

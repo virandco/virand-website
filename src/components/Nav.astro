@@ -5,6 +5,7 @@ import Wordmark from './Wordmark.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import LangToggle from './LangToggle.astro';
 import WhatsAppCta from './WhatsAppCta.astro';
+import { Icon } from 'astro-icon/components';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -32,7 +33,7 @@ const home = lang === 'es' ? '/' : '/en/';
       <ThemeToggle lang={lang} />
       <WhatsAppCta lang={lang} size="sm" compact />
       <details class="nav__mobile">
-        <summary aria-label={lang === 'es' ? 'Abrir menú' : 'Open menu'}><span aria-hidden="true">☰</span></summary>
+        <summary aria-label={lang === 'es' ? 'Abrir menú' : 'Open menu'}><Icon name="ph:list-bold" width="20" height="20" /></summary>
         <nav aria-label={t('nav.sections')}>
           {NAV_ITEMS.map(item => <a href={`${home}#${item.id}`}>{item.label[lang]}</a>)}
           <a href={`${home}#cuestionario`}>{lang === 'es' ? 'Cuéntanos tu proyecto' : 'Tell us about your project'}</a>

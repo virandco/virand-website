@@ -19,7 +19,8 @@ if (hero && video) {
     const target = progress * Math.max(0, video.duration - 1 / 24);
     // Wait for each seek to finish. This avoids queued seeks on slower decoders.
     if (!video.seeking && now - last >= 32 && Math.abs(video.currentTime - target) > .018) {
-      video.currentTime += (target - video.currentTime) * .22;
+      try { video.currentTime += (target - video.currentTime) * .22; }
+      catch { staticPoster(); return; }
       last = now;
     }
     frame = requestAnimationFrame(tick);

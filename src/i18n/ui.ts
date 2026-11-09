@@ -399,7 +399,7 @@ export const questionnaireCopy = {
       "contact": "Contacto",
       "message": "Mensaje"
     },
-    "nojs": "Puedes completar los campos y enviar el formulario. También puedes escribirnos por WhatsApp."
+    "nojs": "Si no puedes usar el cuestionario, escríbenos por WhatsApp."
   },
   "en": {
     "title": "Tell us about your project.",
@@ -555,7 +555,7 @@ export const questionnaireCopy = {
       "contact": "Contact",
       "message": "Message"
     },
-    "nojs": "You can fill in the fields and submit the form. You can also contact us on WhatsApp."
+    "nojs": "If you cannot use the questionnaire, contact us on WhatsApp."
   }
 } as const;
 

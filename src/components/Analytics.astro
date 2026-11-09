@@ -1,0 +1,15 @@
+---
+import { SITE, UMAMI_WEBSITE_ID } from '../consts';
+---
+{import.meta.env.PROD && <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id={UMAMI_WEBSITE_ID} data-domains={SITE.domain} data-do-not-track="true"></script>}
+<script>
+ import { track } from '../lib/analytics';
+ document.addEventListener('click',event=>{
+  const target=event.target instanceof Element?event.target.closest('a'):null;
+  if(!target)return;
+  try {
+   const url=new URL(target.href);
+   if(url.hostname==='wa.me') track('cta_whatsapp',{idioma:document.documentElement.lang==='en'?'en':'es'});
+  } catch { /* malformed links never affect navigation */ }
+ });
+</script>

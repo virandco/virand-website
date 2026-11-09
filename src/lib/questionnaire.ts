@@ -30,7 +30,11 @@ if(form) {
   form.querySelector('[data-step-number]')!.textContent=String(index+1);
   form.querySelector('progress')!.value=index+1;
   form.querySelector<HTMLElement>('[data-entry]')!.hidden=!(index===4&&payload().budget==='under500');
-  if(focus) steps[index].querySelector('legend')?.focus({preventScroll:true});
+  if(focus) {
+   const legend=steps[index].querySelector('legend');
+   legend?.focus({preventScroll:true});
+   legend?.scrollIntoView({block:'nearest',behavior:'instant'});
+  }
  };
  const markErrors=(errors:Partial<Record<FieldName,string>>,onlyCurrent=false)=>{
   const entries=Object.entries(errors).filter(([key])=>!onlyCurrent||stepFields[current].includes(key as FieldName));
@@ -110,4 +114,5 @@ if(form) {
   }
  });
  setStep(0,false);
+ form.hidden=false;
 }

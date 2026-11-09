@@ -12,7 +12,7 @@ const target = otherLang(lang);
 const href = routePath(getRouteKey(Astro.url) ?? 'home', target);
 ---
 
-<a class="lang-toggle" href={href} hreflang={target} aria-label={t('a11y.langToggle')}>
+<a class="lang-toggle" href={href} hreflang={target} aria-label={`ES / EN: ${t('a11y.langToggle')}`}>
   <span class:list={['lang-toggle__opt', { 'is-active': lang === 'es' }]}>ES</span>
   <span class="lang-toggle__sep" aria-hidden="true">/</span>
   <span class:list={['lang-toggle__opt', { 'is-active': lang === 'en' }]}>EN</span>
