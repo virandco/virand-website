@@ -1,0 +1,117 @@
+---
+import { questionnaireCopy } from '../i18n/ui';
+import { getLangFromUrl, routePath } from '../i18n/utils';
+import { CALENDAR_BOOKING_URL, CALENDAR_EMBED_URL } from '../consts';
+const lang=getLangFromUrl(Astro.url), copy=questionnaireCopy[lang];
+const embed=new URL(CALENDAR_EMBED_URL);
+const fallback=new URL(lang==='en'?CALENDAR_EMBED_URL:CALENDAR_BOOKING_URL);
+if(lang==='en') {embed.searchParams.set('hl','en');fallback.searchParams.delete('gv');fallback.searchParams.set('hl','en');}
+const fields=['business','brand','needs','budget'] as const;
+---
+<section class="section questionnaire" id="cuestionario"><div class="shell">
+  <div class="questionnaire__layout">
+    <header><h2 data-reveal>{copy.title}</h2><p data-reveal>{copy.intro}</p></header>
+    <div class="questionnaire__panel">
+      <noscript><p>{copy.nojs}</p></noscript>
+      <form method="POST" action="/api/proyecto" novalidate data-questionnaire data-lang={lang}>
+        <input type="hidden" name="lang" value={lang} />
+        <input type="hidden" name="ts" value="" />
+        <div class="hp" aria-hidden="true"><label for="q-website">Website</label><input id="q-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+        <div class="q-progress" data-progress hidden>
+          <p aria-live="polite">{copy.step} <span data-step-number>1</span> {copy.of} 5</p>
+          <progress value="1" max="5" aria-label={lang==='es'?'Progreso del cuestionario':'Questionnaire progress'}></progress>
+        </div>
+        {fields.map((field,index)=><fieldset data-step={index} aria-describedby={`q-error-${field}`}>
+          <legend tabindex="-1">{copy.questions[index]}</legend>
+          {field==='needs'&&<p class="hint">{copy.multi}</p>}
+          {field==='budget'&&<p class="hint">{copy.budgetHint}</p>}
+          <div class:list={['options',{'options--multiple':field==='needs'}]}>
+            {copy[field].map(option=><label class="option"><input type={field==='needs'?'checkbox':'radio'} name={field} value={option.value} /><span>{option.label}</span></label>)}
+          </div>
+          <p class="field-error" id={`q-error-${field}`} data-error={field} hidden></p>
+          {field==='business'&&<div class="form-field" data-other hidden>
+            <label for="q-businessOther">{copy.labels.businessOther}</label><input id="q-businessOther" name="businessOther" type="text" maxlength="100" aria-describedby="q-error-businessOther" />
+            <p class="field-error" id="q-error-businessOther" data-error="businessOther" hidden></p>
+          </div>}
+        </fieldset>)}
+        <fieldset data-step="4">
+          <legend tabindex="-1">{copy.questions[4]}</legend>
+          <div class="form-field"><label for="q-name">{copy.labels.name}</label><input id="q-name" name="name" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="q-error-name" /><p class="field-error" id="q-error-name" data-error="name" hidden></p></div>
+          <div class="form-field"><label for="q-contact">{copy.labels.contact}</label><input id="q-contact" name="contact" type="text" autocomplete="email" required maxlength="120" aria-describedby="contact-hint q-error-contact" /><p class="hint" id="contact-hint">{copy.labels.contactHint}</p><p class="field-error" id="q-error-contact" data-error="contact" hidden></p></div>
+          <div class="form-field"><label for="q-message">{copy.labels.message}</label><textarea id="q-message" name="message" maxlength="500" rows="3" aria-describedby="message-hint q-error-message"></textarea><p class="hint" id="message-hint">{copy.labels.messageHint}</p><p class="field-error" id="q-error-message" data-error="message" hidden></p></div>
+          <label class="consent"><input type="checkbox" name="consent" required aria-describedby="q-error-consent consent-note" /><span>{copy.consentPrefix}<a href={routePath('privacy',lang)} target="_blank" rel="noopener noreferrer">{copy.consentLink}</a>.</span></label>
+          <p class="hint" id="consent-note">{copy.consentNote}</p><p class="field-error" id="q-error-consent" data-error="consent" hidden></p>
+          <aside class="entry" data-entry hidden><h3>{copy.entryTitle}</h3><p>{copy.entryBody}</p></aside>
+        </fieldset>
+        <p class="form-status" role="alert" tabindex="-1" data-status hidden></p>
+        <div class="q-actions">
+          <button class="back" type="button" data-back hidden>{copy.back}</button>
+          <button class="primary" type="button" data-next hidden>{copy.next}<span aria-hidden="true">↗</span></button>
+          <button class="primary" type="submit" data-submit>{copy.submit}</button>
+          <button class="secondary" type="button" data-whatsapp hidden>{copy.whatsapp}<span aria-hidden="true">↗</span></button>
+        </div>
+      </form>
+      <div class="success" tabindex="-1" role="status" data-success hidden>
+        <p class="success__message">{copy.success}</p>
+        <div data-calendar-host></div>
+        <template data-calendar>
+          <section class="calendar"><h3 tabindex="-1">{copy.calendar}</h3>
+            <iframe data-src={embed.href} title={copy.calendarTitle} width="100%" height="600" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <a href={fallback.href} target="_blank" rel="noopener noreferrer">{copy.calendarFallback}</a>
+          </section>
+        </template>
+      </div>
+    </div>
+  </div>
+</div></section>
+<script>import '../lib/questionnaire';</script>
+<style>
+  .questionnaire { border-top: 1px solid var(--line-wine); }
+  .questionnaire__layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem,5vw,5rem); align-items: start; }
+  header h2 { font-weight: 700; max-width: 12ch; font-size: clamp(2.5rem,5vw,4.5rem); margin: 0; }
+  header p { margin: 1.5rem 0; max-width: 32ch; font-size: 1.05rem; }
+  .questionnaire__panel { background: var(--bg-raised); padding: clamp(1.5rem,3vw,3rem); border: 1px solid var(--line); }
+  form { position: relative; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  fieldset+fieldset { margin-top: 2rem; }
+  form[data-enhanced] fieldset { margin-top: 0; }
+  legend { font: 700 clamp(1.5rem,2.4vw,2rem)/1.15 var(--font-display); color: var(--text-strong); margin-bottom: 1.5rem; }
+  .options { display: grid; gap: .75rem; }
+  .option { display: flex; gap: 1rem; align-items: center; border: 1px solid var(--line-strong); padding: 1rem; cursor: pointer; font-size: .875rem; color: var(--text-strong); }
+  .option:has(input:checked) { border-color: var(--accent-text); background: var(--bg-inset); }
+  input[type=radio], input[type=checkbox] { width: 1.05rem; height: 1.05rem; flex: 0 0 auto; accent-color: var(--accent-text); margin: .15rem 0; }
+  .form-field { display: grid; gap: .5rem; margin-top: 1.25rem; }
+  .form-field label { color: var(--text-strong); font-size: .875rem; }
+  .form-field input, textarea { width: 100%; border: 1px solid var(--line-strong); background: var(--bg-inset); color: var(--text-strong); padding: .85rem 1rem; border-radius: var(--radius-sm); font: inherit; font-size: 1rem; }
+  textarea { resize: vertical; }
+  .hint { font-size: .75rem; color: var(--text); margin: 0 0 .75rem; }
+  .form-field .hint { margin: 0; }
+  .consent { display: flex; gap: .75rem; font-size: .75rem; margin-top: 1.5rem; color: var(--text); }
+  .consent a, .calendar a { text-decoration: underline; text-underline-offset: 3px; color: var(--text-strong); }
+  #consent-note { margin-top: .75rem; }
+  .q-progress { margin-bottom: 2rem; }
+  .q-progress p { font-size: .75rem; color: var(--text); margin: 0 0 .75rem; }
+  progress { display: block; width: 100%; height: 2px; border: 0; background: var(--line); }
+  progress::-webkit-progress-bar { background: var(--line); }
+  progress::-webkit-progress-value { background: var(--accent-text); }
+  .q-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; align-items: center; }
+  button { border-radius: var(--radius-sm); cursor: pointer; font-family: inherit; font-weight: 600; font-size: .8125rem; padding: .95rem 1.1rem; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 1rem; }
+  button:active { transform: translateY(1px); }
+  button:disabled { opacity: .6; cursor: wait; }
+  .primary { background: var(--cta-bg); color: var(--cta-text); border: 1px solid var(--cta-bg); }
+  .primary:hover { background: var(--cta-bg-hover); }
+  .secondary { background: transparent; color: var(--text-strong); border: 1px solid var(--line-strong); }
+  .back { background: transparent; color: var(--text); border: 0; padding-inline: 0; margin-right: auto; }
+  .field-error,.form-status { color: var(--text-strong); font-size: .8125rem; border-left: 2px solid var(--accent-text); padding-left: .75rem; margin: .75rem 0; }
+  [aria-invalid=true] { outline: 1px solid var(--accent-text); }
+  .entry { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line-wine); }
+  .entry h3,.calendar h3 { font-size: 1.5rem; line-height: 1.15; font-weight: 700; margin: 0 0 .75rem; }
+  .entry p { font-size: .875rem; margin: 0; }
+  .success__message { color: var(--text-strong); font-size: 1.25rem; margin: 0 0 2rem; }
+  iframe { border: 1px solid var(--line); margin-block: 1.5rem; background: var(--bg-raised); }
+  .calendar a { font-size: .8125rem; }
+  .hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  [hidden] { display: none !important; }
+  @media(max-width: 1023px) { .questionnaire__layout { grid-template-columns: 1fr; } header h2 { max-width: 20ch; } header p { max-width: 45ch; } }
+  @media(max-width: 479px) { .q-actions { gap: .75rem; } .secondary { width: 100%; } .questionnaire__panel { padding: 1.25rem; } }
+</style>
