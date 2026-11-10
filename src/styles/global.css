@@ -70,6 +70,33 @@
   --focus: var(--wine);
 }
 
+/* Dot pattern ink per theme (see .dots below). --page-bg is the theme background
+   that .theme-dark blocks do NOT override, so they can fade into the page. */
+:root { --dot: rgba(255, 255, 255, 0.11); --dot-hot: rgba(201, 168, 76, 0.42); --page-bg: #080808; }
+:root[data-theme="light"] { --dot: rgba(8, 8, 8, 0.09); --dot-hot: rgba(107, 15, 26, 0.38); --page-bg: #f4f4f5; }
+
+/* Cinematic scope: the box interior and the video bands stay obsidian in both
+   themes. One deliberate color block, entered through the box animation. */
+.theme-dark {
+  color-scheme: dark;
+  --bg: #080808;
+  --bg-raised: #0c0c0c;
+  --bg-inset: #111112;
+  --text-strong: #ffffff;
+  --text: #a1a1aa;
+  --text-dim: #71717a;
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --line-wine: rgba(107, 15, 26, 0.38);
+  --accent-text: var(--gold-bright);
+  --cta-bg-hover: var(--gold-bright);
+  --focus: var(--gold);
+  --dot: rgba(255, 255, 255, 0.11);
+  --dot-hot: rgba(201, 168, 76, 0.42);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
 /* Expose tokens to Tailwind utilities (bg-bg, text-strong, font-display, ...) */
 @theme inline {
   --color-bg: var(--bg);
@@ -211,6 +238,110 @@
   opacity: 0.04;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Ghost numbers (brand watermark, as in the proposal layout): Black 900,
+   gold at 20%, right-aligned, always behind the content. */
+.ghost {
+  position: absolute;
+  z-index: 0;
+  /* Right edge of the content shell (80rem), not of the viewport. */
+  right: max(clamp(1.25rem, 5vw, 3rem), calc((100% - 80rem) / 2 + 3rem));
+  top: clamp(2.5rem, 7vh, 4.5rem);
+  font: 900 clamp(6rem, 15vw, 13rem)/.8 var(--font-display);
+  letter-spacing: -0.04em;
+  color: var(--gold);
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 1.2s var(--ease-brand), opacity 0.6s var(--ease-brand);
+}
+:root[data-theme="light"] .ghost { color: var(--wine); opacity: 0.1; }
+@media (max-width: 639px) {
+  .ghost { font-size: 4.5rem; top: 0.9rem; opacity: 0.16; }
+  :root[data-theme="light"] .ghost { opacity: 0.08; }
+}
+.theme-dark .ghost { color: var(--gold); opacity: 0.2; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  section:hover > .ghost, section:hover > * > .ghost { transform: translateX(-0.6rem); }
+}
+.section > .shell, .sig__body > .shell { position: relative; z-index: 1; }
+
+/* ============================================================
+   Halftone dot pattern. Static background on a pseudo-element, faded by a
+   mask so it reads as a halftone gradient. `--dots-at` moves the dense corner.
+   `.dots--live` adds a gold/wine layer revealed around the pointer.
+   ============================================================ */
+.dots { position: relative; isolation: isolate; }
+.dots::before,
+.dots--live::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, var(--dot) 1.1px, transparent 1.6px);
+  background-size: 15px 15px;
+  --edge: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-image: radial-gradient(120% 85% at var(--dots-at, 100% 100%), #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 78%), var(--edge);
+  mask-image: radial-gradient(120% 85% at var(--dots-at, 100% 100%), #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 78%), var(--edge);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+.dots--live::after {
+  background-image: radial-gradient(circle at center, var(--dot-hot) 1.3px, transparent 1.9px);
+  -webkit-mask-image: radial-gradient(260px circle at var(--mx, -999px) var(--my, -999px), #000, transparent 72%), var(--edge);
+  mask-image: radial-gradient(260px circle at var(--mx, -999px) var(--my, -999px), #000, transparent 72%), var(--edge);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-brand);
+}
+.dots--live:hover::after { opacity: 1; }
+
+/* Whole-page texture: barely there, so the dark areas are never flat. */
+body {
+  background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.028) 1px, transparent 1.5px);
+  background-size: 15px 15px;
+}
+:root[data-theme="light"] body {
+  background-image: radial-gradient(circle at center, rgba(8, 8, 8, 0.035) 1px, transparent 1.5px);
+}
+
+/* ============================================================
+   Pointer vocabulary (desktop pointers only, motion allowed).
+   [data-spot]  → radial light following the cursor (--mx/--my set by JS)
+   .hover-ink   → headline turns to the accent color on hover, as in the
+                  published site; [data-ink-host] lets a whole card trigger it.
+   ============================================================ */
+[data-spot] { position: relative; }
+[data-spot]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent-text) 11%, transparent), transparent 62%);
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-brand);
+}
+[data-spot]:hover::after { opacity: 1; }
+
+.hover-ink { transition: color 0.3s var(--ease-brand); }
+@media (hover: hover) and (pointer: fine) {
+  .hover-ink:hover,
+  [data-ink-host]:hover .hover-ink { color: var(--accent-text); }
+}
+
+/* Thin overline above the heavy editorial titles (as in VIRAND OS). */
+/* Doubled class: it must beat the scoped `p { ... }` rules of each section so every
+   overline keeps the same size, tracking and gap as the hero one. */
+.eyebrow.eyebrow {
+  display: block;
+  max-width: none;
+  margin: 0 0 1.5rem;
+  font: 600 0.72rem/1.2 var(--font-body);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-text);
 }
 
 /* Scroll-reveal (progressive enhancement; JS adds .is-visible) */

@@ -5,40 +5,151 @@ import { getLangFromUrl } from '../i18n/utils';
 import ActionPair from './ActionPair.astro';
 const lang = getLangFromUrl(Astro.url);
 const copy = landingCopy[lang].signature;
+const included = lang === 'es' ? 'Incluye' : 'Included';
 ---
-<section class="section signature" id="signature">
-  <div class="shell">
-    <header data-reveal><h2>{copy.title}</h2><p class="intro">{copy.intro}</p></header>
-    <div class="signature__engine">
-      <div class="signature__overview" data-reveal>
-        <p class="statement">{copy.body}</p>
-        <ul class="terms">{copy.terms.map(term => <li>{term}</li>)}</ul>
-        <p class="delivery">{copy.delivery}</p>
-        <ActionPair lang={lang} />
+{/*
+  The box already opens while it scrolls in (mode "lead"), then pins while the
+  camera moves inside. When the frame goes dark the offer name appears centered
+  "inside the box"; the price lives only in the card below. The section stays
+  obsidian in both themes: the one deliberate color block of the page.
+*/}
+<section class="sig theme-dark" aria-labelledby="signature-title">
+  <div class="box" data-scrub="lead" data-scrub-src="/media/box">
+    <span class="box__anchor" id="signature" aria-hidden="true"></span>
+    <div class="box__stage">
+      <img class="box__poster" src="/media/box-poster.jpg" width="1280" height="720" alt="" loading="lazy" decoding="async" />
+      <video class="box__video" muted playsinline preload="none" aria-hidden="true" data-scrub-video style="transform: translateZ(0); -webkit-transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden;"></video>
+      <div class="box__glow" aria-hidden="true"></div>
+      <div class="box__fade" aria-hidden="true"></div>
+      <div class="box__offer shell">
+        <p class="eyebrow">{copy.priceLabel}</p>
+        <h2 id="signature-title">{copy.title}</h2>
+        <p class="box__intro">{copy.intro}</p>
       </div>
-      <ol class="pieces" aria-label={copy.intro}>
-        {copy.pieces.map((piece,i) => <li data-reveal style={`--reveal-delay: ${i*80}ms`}>
-          <Icon name={`ph:${piece.icon}-light`} />
-          <div><h3>{piece.title}</h3><p>{piece.body}</p></div>
-        </li>)}
-      </ol>
+    </div>
+  </div>
+
+  <div class="sig__body">
+    <span class="ghost" aria-hidden="true">01</span>
+    <div class="shell">
+      <p class="statement" data-reveal>{copy.body}</p>
+
+      <article class="offer" data-reveal data-spot>
+        <span class="offer__tag">{copy.priceLabel}</span>
+        <div class="offer__main">
+          <p class="offer__label">{included}</p>
+          <ol class="pieces">
+            {copy.pieces.map((piece, i) => <li class="piece" data-ink-host>
+              <span class="piece__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <Icon name={`ph:${piece.icon}-light`} class="piece__icon" aria-hidden="true" />
+              <div><h3 class="hover-ink">{piece.title}</h3><p>{piece.body}</p></div>
+            </li>)}
+          </ol>
+          <p class="delivery">{copy.delivery}</p>
+        </div>
+        <aside class="offer__price" aria-label={`${copy.title}: ${copy.price} ${copy.currency}`}>
+          <p class="price"><span class="price__amount">{copy.price}</span><span class="price__currency">{copy.currency}</span></p>
+          <ul class="terms">{copy.terms.map(term => <li><Icon name="ph:check-bold" aria-hidden="true" />{term}</li>)}</ul>
+          <ActionPair lang={lang} />
+          <p class="note">{copy.priceNote}</p>
+        </aside>
+      </article>
     </div>
   </div>
 </section>
+
 <style>
-  .signature { border-top: 1px solid var(--line-wine); }
-  h2 { font-size: clamp(3rem, 7.5vw, 6.5rem); font-weight: 700; margin: 0; letter-spacing: -.025em; }
-  .intro { margin: 1rem 0 3rem; font-size: clamp(1.15rem, 2vw, 1.5rem); color: var(--accent-text); }
-  .signature__engine { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(2rem,6vw,6rem); }
-  .statement { font-size: clamp(1.25rem, 2.2vw, 1.85rem); color: var(--text-strong); line-height: 1.4; margin: 0 0 2rem; max-width: 28ch; }
-  .terms { padding: 0; margin: 0 0 1.5rem; list-style: none; display: grid; gap: .75rem; color: var(--text-strong); font-size: .875rem; }
-  .terms li { border-left: 2px solid var(--wine); padding-left: 1rem; }
-  .delivery { max-width: 42ch; margin: 0 0 2rem; font-size: .875rem; }
-  .pieces { margin: 0; padding: 0 2rem; list-style: none; background: var(--bg-raised); border: 1px solid var(--line-wine); }
-  .pieces li { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding-block: 2.5rem; }
-  .pieces li+li { border-top: 1px solid var(--line); }
-  .pieces :global(svg) { width: 2.5rem; height: 2.5rem; color: var(--accent-text); }
-  h3 { font-size: clamp(1.5rem,2.2vw,2rem); font-weight: 700; line-height: 1; margin: 0 0 .75rem; }
-  .pieces p { max-width: 38ch; margin: 0; font-size: .95rem; }
-  @media(max-width: 767px) { .signature__engine { grid-template-columns: 1fr; } .statement { max-width: 34ch; } .pieces { padding-inline: 1.5rem; } .pieces li { gap: 1rem; padding-block: 2rem; } }
+  /* ---------- Box stage ---------- */
+  .box { position: relative; height: 300svh; }
+  /* Nav target: the moment the offer name is fully on screen (p ≈ .92). */
+  .box__anchor { position: absolute; left: 0; top: 180svh; width: 1px; height: 1px; }
+  .box__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; align-items: center; isolation: isolate; background: #000; /* matches the clip black */ }
+  .box__poster, .box__video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
+    --r: clamp(0, calc((var(--p, 0) - .73) / .17), 1);
+    transform: scale(calc(1 + var(--r) * .4));
+    opacity: calc(1 - var(--r) * .6);
+    transform-origin: 50% 45%;
+  }
+  .box__video { opacity: 0; }
+  /* Once the clip is decoding, the poster (closed box) must not bleed through the dark interior. */
+  .box__stage:has(.box__video[data-ready]) .box__poster { visibility: hidden; }
+  .box__video[data-ready] { opacity: calc(1 - clamp(0, calc((var(--p, 0) - .73) / .17), 1) * .6); }
+  .box__glow {
+    position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(60% 55% at 50% 55%, rgba(107, 15, 26, .55), transparent 70%);
+    opacity: clamp(0, calc((var(--p, 0) - .7) / .2), 1);
+  }
+  /* Soft seam with the hero above while the box scrolls in; gone once it pins. */
+  .box__fade { position: absolute; inset: 0 0 auto; height: 28%; z-index: -1; pointer-events: none; background: linear-gradient(#000, transparent); opacity: clamp(0, calc(1 - var(--p, 0) / .3), 1); }
+  /* The only centered text on the page: the main offer. */
+  .box__offer {
+    --r: clamp(0, calc((var(--p, 0) - .76) / .15), 1);
+    display: grid; justify-items: center; text-align: center;
+    opacity: var(--r);
+    transform: translateY(calc((1 - var(--r)) * 3rem)) scale(calc(.9 + var(--r) * .1));
+  }
+  .box__offer h2 { margin: 0; font-size: clamp(3rem, 8.5vw, 8rem); line-height: .9; letter-spacing: -.02em; max-width: 11ch; }
+  .box__intro { margin: 1.4rem 0 0; max-width: 30ch; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 500; color: var(--text-strong); }
+
+  /* ---------- Offer body ---------- */
+  /* Starts on the clip black and settles on the page obsidian: no seam on either side. */
+  .sig__body { position: relative; overflow: hidden; padding-block: clamp(4rem, 10vh, 7rem) clamp(5rem, 12vh, 8rem); background: linear-gradient(#000, var(--bg) 45%); }
+  .ghost { top: clamp(2rem, 6vh, 4rem); }
+  .statement { position: relative; margin: 0 0 clamp(1.75rem, 4.5vh, 3rem); max-width: 36ch; font-size: clamp(1.25rem, 2.2vw, 1.85rem); line-height: 1.3; font-weight: 500; color: var(--text-strong); }
+
+  .offer { position: relative; display: grid; grid-template-columns: 1.62fr 1fr; border: 2px solid var(--gold); background: color-mix(in srgb, #0c0c0c 88%, transparent); }
+  .offer__tag { position: absolute; top: -2px; right: -2px; padding: .55rem .9rem; background: var(--gold); color: #080808; font: 700 .7rem/1 var(--font-body); letter-spacing: .22em; text-transform: uppercase; }
+  /* Sized by viewport height so the whole card fits on one screen. */
+  .offer__main { padding: clamp(1.1rem, 3vh, 2.25rem) clamp(1.5rem, 3vw, 2.75rem); }
+  .offer__label { margin: 0 0 clamp(.4rem, 1.2vh, .8rem); font: 700 .75rem/1 var(--font-body); letter-spacing: .22em; text-transform: uppercase; color: var(--gold-bright); }
+  .pieces { list-style: none; margin: 0; padding: 0; }
+  .piece { position: relative; display: grid; grid-template-columns: 2.75rem 2.25rem 1fr; gap: 1rem; align-items: start; padding: clamp(.7rem, 2vh, 1.2rem) 1rem clamp(.7rem, 2vh, 1.2rem) 0; border-top: 1px solid var(--line); transition: background-color .4s var(--ease-brand), padding .4s var(--ease-brand); }
+  .piece::before { content: ""; position: absolute; left: 0; top: -1px; height: 2px; width: 100%; background: var(--gold); transform: scaleX(0); transform-origin: 0 50%; transition: transform .6s var(--ease-brand); }
+  .piece__num { font: 900 1.6rem/1 var(--font-display); color: var(--gold); transition: transform .4s var(--ease-brand); }
+  .piece :global(.piece__icon) { width: 2rem; height: 2rem; color: var(--gold-bright); transition: transform .5s var(--ease-brand); }
+  .piece h3 { margin: 0 0 .3rem; font-size: clamp(1.2rem, 1.8vw, 1.55rem); font-weight: 700; line-height: 1.05; text-transform: uppercase; }
+  .piece p { margin: 0; max-width: 46ch; font-size: .9rem; line-height: 1.5; font-weight: 500; }
+  .delivery { margin: clamp(.8rem, 2vh, 1.4rem) 0 0; max-width: 56ch; font-size: .85rem; line-height: 1.5; }
+
+  .offer__price { display: flex; flex-direction: column; justify-content: center; gap: clamp(.9rem, 2.4vh, 1.5rem); padding: clamp(1.1rem, 3vh, 2.25rem) clamp(1.5rem, 3vw, 2.75rem); padding-top: clamp(2.75rem, 5vh, 3.75rem); border-left: 1px solid rgba(201, 168, 76, .28); background: rgba(201, 168, 76, .045); }
+  .price { display: flex; align-items: baseline; gap: .6rem; margin: 0; }
+  .price__amount { font: 900 clamp(3.5rem, 6.5vw, 5.5rem)/.9 var(--font-display); letter-spacing: -.03em; color: var(--gold); }
+  .price__currency { font: 700 1rem/1 var(--font-body); letter-spacing: .22em; color: var(--gold-bright); }
+  .terms { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; color: var(--text-strong); font-size: .9rem; font-weight: 500; }
+  .terms li { display: flex; gap: .65rem; align-items: center; }
+  .terms :global(svg) { width: 1rem; height: 1rem; flex: none; color: var(--gold); }
+  .note { margin: 0; font-size: .78rem; color: var(--text-dim); max-width: 36ch; }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .piece:hover { background: rgba(201, 168, 76, .04); padding-left: .75rem; }
+    .piece:hover::before { transform: scaleX(1); }
+    .piece:hover .piece__num { transform: translateY(-.15rem) scale(1.12); }
+    .piece:hover :global(.piece__icon) { transform: rotate(-8deg) scale(1.12); }
+  }
+
+  @media (max-width: 1023px) {
+    .offer { grid-template-columns: 1fr; }
+    .offer__price { border-left: 0; border-top: 1px solid rgba(201, 168, 76, .28); padding-top: clamp(1.75rem, 3.5vw, 3rem); }
+  }
+  @media (max-width: 767px) {
+    .box { height: 260svh; }
+    .box__anchor { top: 145svh; }
+    /* Keep the whole box in frame on tall screens. */
+    .box__poster, .box__video { object-fit: contain; transform: scale(calc(1.6 + var(--r) * .6)); }
+    .box__offer h2 { max-width: 9ch; font-size: clamp(2.6rem, 13vw, 4.5rem); }
+    .piece { grid-template-columns: 2.25rem 1fr; padding-right: 0; }
+    .piece :global(.piece__icon) { display: none; }
+    .offer__tag { position: static; display: block; width: max-content; margin-left: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .box { height: auto; }
+    .box__stage { position: relative; min-height: 100svh; height: auto; padding-block: 6rem; }
+    .box__poster { opacity: .45; transform: none; }
+    .box__video { display: none; }
+    .box__glow { opacity: 1; }
+    .box__fade { display: none; }
+    .box__offer { opacity: 1; transform: none; }
+    .box__anchor { top: 0; }
+  }
 </style>

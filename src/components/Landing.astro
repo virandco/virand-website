@@ -7,10 +7,27 @@ import Faq from './Faq.astro';
 import Footer from './Footer.astro';
 import Questionnaire from './Questionnaire.astro';
 import ClosingIcon from './ClosingIcon.astro';
+import MediaBand from './MediaBand.astro';
+import ChatAssist from './ChatAssist.astro';
+import { bandCopy } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+const bands = bandCopy[getLangFromUrl(Astro.url)];
 ---
 <main id="main">
-  <Hero /><Signature /><Process /><Services /><Faq />
+  <Hero />
+  <Signature />
+  <Process />
+  <MediaBand clip="/media/motion" desktopPoster title={bands.motion} />
+  <Services />
+  <Faq />
+  <MediaBand clip="/media/crowd" title={bands.crowd} align="end" />
   <Questionnaire />
   <ClosingIcon />
 </main>
 <Footer />
+<ChatAssist />
+<script>
+  import { scrubAll } from '../lib/scrub';
+  import '../lib/interactions';
+  scrubAll();
+</script>

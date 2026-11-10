@@ -9,6 +9,7 @@ Umami Cloud conserva el identificador público de main y solo mide virand.co en 
 | cta_whatsapp | Clic en WhatsApp, incluidos los CTA y el cierre del cuestionario | idioma: es o en |
 | form_enviado | El endpoint confirma el envío | idioma: es o en |
 | agenda_vista | La agenda aparece en el viewport tras el envío | idioma: es o en |
+| chat_abierto | El visitante abre el asistente de preguntas frecuentes (una vez por visita) | idioma: es o en |
 
 No se envían respuestas, presupuesto, etiquetas internas, nombre, correo, teléfono, negocio ni mensaje. El módulo filtra categorías y propiedades por listas cerradas. Los enlaces navegan sin esperar a la analítica.
 

@@ -1,23 +1,29 @@
 ---
-import iconWine from '../assets/VIRAND-icono-wine.svg';
+import { getLangFromUrl } from '../i18n/utils';
+import { ICON_PATHS, ICON_VIEWBOX } from '../lib/brand';
+const lang = getLangFromUrl(Astro.url);
 ---
-<section class="closing section" aria-label="Build Perception">
+<section class="closing section dots dots--live" aria-label="Build Perception">
   <div class="shell">
-    <div class="closing__icon" data-closing-icon aria-hidden="true">
-      <img src={iconWine.src} width="1928" height="1250" alt="" loading="lazy" />
-      <canvas></canvas>
+    <div class="closing__icon" data-closing-icon data-icon-mode="static">
+      <svg class="closing__flat" viewBox={ICON_VIEWBOX} fill="currentColor" aria-hidden="true" focusable="false" set:html={ICON_PATHS} />
+      <canvas role="img" aria-label={lang === 'es' ? 'Ícono de VIRAND en 3D' : 'VIRAND icon in 3D'}></canvas>
     </div>
-    <p>Build Perception</p>
+    <p class="closing__tagline">Build Perception</p>
   </div>
 </section>
 <script>import '../lib/closingIcon';</script>
 <style>
-  .closing { text-align: center; padding-block: clamp(4rem,9vh,6.5rem); }
-  .closing__icon { position: relative; width: min(100%, 36rem); aspect-ratio: 1.5; margin: 0 auto 2.5rem; }
-  img { position: absolute; width: 52%; height: auto; left: 24%; top: 24%; }
-  canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+  .closing { --dots-at: 50% 100%; text-align: center; padding-block: clamp(4rem, 9vh, 6.5rem); overflow: hidden; }
+  .closing__icon { position: relative; width: min(100%, 46rem); aspect-ratio: 1.5; margin: 0 auto 2rem; }
+  .closing__flat { position: absolute; inset: 0; margin: auto; width: 40%; height: auto; color: var(--wine); transition: opacity .8s var(--ease-brand); }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: grab; touch-action: none; transition: opacity .8s var(--ease-brand); }
+  canvas:global(.is-dragging) { cursor: grabbing; }
+  /* Touch: horizontal drags turn the icon, vertical swipes still scroll the page. */
+  @media (pointer: coarse) { canvas { touch-action: pan-y; } }
   [data-icon-mode="3d"] canvas { opacity: 1; }
-  [data-icon-mode="3d"] img { visibility: hidden; }
-  p { margin: 0; font: 700 clamp(2.5rem,7.5vw,7rem)/.96 var(--font-display); letter-spacing: -.025em; text-transform: uppercase; color: var(--text-strong); }
-  @media(max-width: 767px) { .closing__icon { max-width: 24rem; margin-bottom: 2rem; } }
+  [data-icon-mode="3d"] .closing__flat { opacity: 0; }
+  [data-icon-mode="static"] canvas { pointer-events: none; }
+  .closing__tagline { margin: 0; font: 900 clamp(2.5rem, 7.5vw, 7rem)/.96 var(--font-display); letter-spacing: -.025em; text-transform: uppercase; color: var(--text-strong); }
+  @media (max-width: 767px) { .closing__icon { max-width: 30rem; margin-bottom: 1.5rem; } }
 </style>

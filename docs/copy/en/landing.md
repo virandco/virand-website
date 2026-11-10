@@ -6,19 +6,23 @@ Fuente: encargo CODEX-007 y textos aprobados de main. ES es la fuente; EN conser
 
 Three parts. One engine for your business.
 
-A brand foundation, a landing page and a WhatsApp customer service and scheduling agent, connected in one implementation.
+One complete package: your brand, a website that converts and an agent that answers and schedules, connected in one implementation.
 
-### Basic brand kit
+**950 USD** · Starter package. The only price published on the site.
 
-Colors, typography and visual rules for a consistent presence.
+The domain is included. Hosting, APIs and messaging are contracted separately, in your name.
 
-### Conversion landing page
+### Brand kit
+
+Basic branding: colors, typography and visual rules for a consistent presence.
+
+### Conversion website or landing page
 
 Your offer, with a clear way to inquire, schedule or request a quote.
 
-### Customer service and scheduling
+### Guided or hybrid agent
 
-A guided or hybrid WhatsApp agent that presents options, captures details and helps schedule appointments.
+On WhatsApp or built into your website. It presents options, captures details and helps schedule appointments.
 
 - Fixed price per implementation
 
@@ -76,22 +80,42 @@ An identity and the rules to keep it consistent.
 
 ## Before we start.
 
-### How long does Signature System take?
+### What does VIRAND do?
 
-Starting at 2 weeks, depending on scope and your materials. We confirm the timeframe before work starts.
+We build systems so your business runs and sells better: branding, landing pages and websites, process automation, AI agents and custom software. We also manage social media content and Meta and Google ads.
+
+### What is the difference between Signature System and a custom project?
+
+Signature System is a closed, fixed-price package: a brand kit, a landing page and a guided or hybrid agent, starting at 2 weeks. A custom project is designed around your processes and quoted based on scope. If you are not sure which one you need, we work it out together in the first conversation.
+
+### Do you build AI agents?
+
+Yes. Besides the guided or hybrid agent in Signature System, we develop specialized AI agents for your business: they answer your customers, resolve questions, qualify leads, quote or schedule following your rules and your information. They work on WhatsApp or built into your website.
+
+### My process is very specific. Can it be automated?
+
+Often, yes. Before building, we analyze how you work and define what makes sense to automate. If something cannot be done or is not worth doing, we tell you from the start. Processes with their own rules or very specific variables are exactly what we build custom.
+
+### What kinds of businesses do you work with?
+
+Mostly businesses that handle appointments or serve customers every day: clinics, aesthetics, restaurants, stores and appointment-based services. If yours is different, tell us how it operates and we will see how we can help.
 
 ### How is the price set?
 
-A fixed price per implementation, with no mandatory monthly fees. We agree on scope and price before work starts.
-
-### What do I receive?
-
-The basic brand kit, landing page, WhatsApp customer service and scheduling agent, a usage manual and your access.
+Signature System has a fixed price per implementation, with no mandatory monthly fees. Custom projects are quoted based on scope, and before we start you agree with us on what is included and what it costs.
 
 ### Who pays for APIs and messaging?
 
-You pay for them, along with third-party services such as your domain and hosting. You contract them in your name. VIRAND shows you how to set them up and supports you through the process.
+You pay for them, along with third-party services such as hosting. You contract them in your name. We include the domain. VIRAND shows you how to set them up and supports you through the process.
 
-### How does the agent work?
+### What do I receive at the end, and is there support afterwards?
 
-It uses a guided or hybrid flow. It presents options, assists your customers and captures information such as service, time and contact details.
+You receive the working system, its usage manual and your access. If you want support later, such as an explanation session or specific adjustments, it is agreed separately.
+
+### Do I need technical knowledge?
+
+No. We give you a usage manual and show you how to set up and top up the services you contract.
+
+### How do I get started?
+
+Tell us about your project in the questionnaire or message us on WhatsApp. We reply through the channel you prefer and, if it is a fit, we schedule a call.

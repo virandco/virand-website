@@ -37,6 +37,9 @@ const attrs = external
   .wa-cta {
     --pad-x: 1.1rem;
     --pad-y: 0.7rem;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -52,21 +55,51 @@ const attrs = external
     white-space: nowrap;
     border-radius: var(--radius-sm);
     transition:
-      background-color 0.2s var(--ease-brand),
-      transform 0.12s var(--ease-brand);
+      background-color 0.25s var(--ease-brand),
+      box-shadow 0.35s var(--ease-brand),
+      transform 0.35s var(--ease-brand);
+  }
+
+  /* Light sweep across the gold on hover. */
+  .wa-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+    transform: translateX(-110%);
+    transition: transform 0.7s var(--ease-brand);
   }
 
   .wa-cta:hover {
     background: var(--cta-bg-hover);
+    box-shadow: 0 10px 28px -12px rgba(201, 168, 76, 0.65);
+  }
+
+  .wa-cta:hover::after {
+    transform: translateX(110%);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .wa-cta:hover {
+      transform: scale(1.045);
+    }
   }
 
   .wa-cta:active {
-    transform: translateY(1px);
+    transform: scale(0.97);
   }
 
-  .wa-cta__icon {
+  .wa-cta :global(.wa-cta__icon) {
     width: 1.05em;
     height: 1.05em;
+    transition: transform 0.45s var(--ease-brand);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .wa-cta:hover :global(.wa-cta__icon) {
+      transform: rotate(-12deg) scale(1.12);
+    }
   }
 
   .wa-cta--sm {

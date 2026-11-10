@@ -8,9 +8,9 @@ const fallback=new URL(lang==='en'?CALENDAR_EMBED_URL:CALENDAR_BOOKING_URL);
 if(lang==='en') {embed.searchParams.set('hl','en');fallback.searchParams.delete('gv');fallback.searchParams.set('hl','en');}
 const fields=['business','brand','needs','budget'] as const;
 ---
-<section class="section questionnaire" id="cuestionario"><div class="shell">
+<section class="section questionnaire dots dots--live" id="cuestionario"><div class="shell">
   <div class="questionnaire__layout">
-    <header><h2 data-reveal>{copy.title}</h2><p data-reveal>{copy.intro}</p></header>
+    <header><p class="eyebrow" data-reveal>{lang === 'es' ? 'Contacto' : 'Contact'}</p><h2 data-reveal>{copy.title}</h2><p class="lead" data-reveal>{copy.intro}</p></header>
     <div class="questionnaire__panel">
       <noscript><p>{copy.nojs}</p><a href={WHATSAPP.url} target="_blank" rel="noopener noreferrer">WhatsApp</a></noscript>
       <form method="POST" action="/api/proyecto" novalidate data-questionnaire data-lang={lang} hidden>
@@ -66,10 +66,10 @@ const fields=['business','brand','needs','budget'] as const;
 </div></section>
 <script>import '../lib/questionnaire';</script>
 <style>
-  .questionnaire { border-top: 1px solid var(--line-wine); }
+  .questionnaire { --dots-at: 0% 30%; overflow: hidden; }
   .questionnaire__layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem,5vw,5rem); align-items: start; }
-  header h2 { font-weight: 700; max-width: 12ch; font-size: clamp(2.5rem,5vw,4.5rem); margin: 0; }
-  header p { margin: 1.5rem 0; max-width: 32ch; font-size: 1.05rem; }
+  header h2 { max-width: 12ch; font-size: clamp(2.5rem,5vw,4.5rem); margin: 0; }
+  .lead { margin: 1.5rem 0; max-width: 32ch; font-size: 1.05rem; }
   .questionnaire__panel { background: var(--bg-raised); padding: clamp(1.5rem,3vw,3rem); border: 1px solid var(--line); }
   form { position: relative; }
   fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
@@ -112,6 +112,6 @@ const fields=['business','brand','needs','budget'] as const;
   .calendar a { font-size: .8125rem; }
   .hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   [hidden] { display: none !important; }
-  @media(max-width: 1023px) { .questionnaire__layout { grid-template-columns: 1fr; } header h2 { max-width: 20ch; } header p { max-width: 45ch; } }
+  @media(max-width: 1023px) { .questionnaire__layout { grid-template-columns: 1fr; } header h2 { max-width: 20ch; } .lead { max-width: 45ch; } }
   @media(max-width: 479px) { .q-actions { gap: .75rem; } .secondary { width: 100%; } .questionnaire__panel { padding: 1.25rem; } }
 </style>

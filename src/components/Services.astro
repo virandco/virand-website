@@ -1,19 +1,34 @@
 ---
 import { landingCopy } from '../i18n/ui';
 import { getLangFromUrl } from '../i18n/utils';
-const copy = landingCopy[getLangFromUrl(Astro.url)].custom;
+const lang = getLangFromUrl(Astro.url);
+const copy = landingCopy[lang].custom;
 ---
-<section class="section custom" id="a-medida"><div class="shell">
-  <header data-reveal><h2>{copy.title}</h2><p class="intro">{copy.intro}</p></header>
-  <dl>{copy.items.map(item => <div data-reveal><dt>{item.title}</dt><dd>{item.body}</dd></div>)}</dl>
-</div></section>
+<section class="section custom dots" id="a-medida">
+  <span class="ghost" aria-hidden="true">03</span>
+  <div class="shell">
+    <header data-reveal>
+      <p class="eyebrow">{lang === 'es' ? 'A medida' : 'Custom work'}</p>
+      <h2>{copy.title}</h2>
+      <p class="intro">{copy.intro}</p>
+    </header>
+    <dl>{copy.items.map((item, i) => <div class="item" data-reveal data-ink-host style={`--reveal-delay:${(i % 2) * 70}ms`}>
+      <dt class="hover-ink">{item.title}</dt>
+      <dd>{item.body}</dd>
+    </div>)}</dl>
+  </div>
+</section>
 <style>
-  .custom { background: var(--bg-raised); }
-  h2 { font-weight: 700; max-width: 17ch; font-size: clamp(2.5rem,5vw,4.5rem); margin: 0; }
-  .intro { max-width: 48ch; margin: 1.5rem 0 3.5rem; font-size: clamp(1rem,1.4vw,1.15rem); }
-  dl { display: grid; grid-template-columns: repeat(2,1fr); column-gap: 5rem; row-gap: 2.5rem; margin: 0; }
-  dl>div { border-left: 1px solid var(--line-wine); padding-left: 1.5rem; }
-  dt { color: var(--text-strong); font: 700 clamp(1.5rem,2.2vw,2rem)/1.1 var(--font-display); }
-  dd { margin: .75rem 0 0; max-width: 40ch; font-size: .95rem; }
-  @media(max-width: 767px) { dl { grid-template-columns: 1fr; gap: 2rem; } }
+  .custom { --dots-at: 0% 100%; overflow: hidden; }
+  h2 { max-width: 17ch; font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 0; }
+  .intro { max-width: 48ch; margin: 1.5rem 0 3.5rem; font-size: clamp(1rem, 1.4vw, 1.15rem); font-weight: 500; }
+  dl { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 3rem; row-gap: 1rem; margin: 0; }
+  .item { position: relative; border-left: 2px solid var(--line-wine); padding: 1.25rem 1.5rem 1.4rem; transition: border-color .35s var(--ease-brand); }
+  dt { color: var(--text-strong); font: 700 clamp(1.4rem, 2.1vw, 1.85rem)/1.1 var(--font-display); text-transform: uppercase; transition: transform .45s var(--ease-brand), color .3s var(--ease-brand); }
+  dd { margin: .6rem 0 0; max-width: 40ch; font-size: .95rem; font-weight: 500; transition: transform .45s var(--ease-brand) 40ms; }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .item:hover { border-left-color: var(--accent-text); }
+    .item:hover dt, .item:hover dd { transform: translateX(.5rem); }
+  }
+  @media (max-width: 767px) { dl { grid-template-columns: 1fr; } .item { padding-inline: 1.1rem; } }
 </style>

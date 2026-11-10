@@ -20,36 +20,46 @@ export const ui = {
 export type UIKey = keyof (typeof ui)[typeof defaultLang];
 export const heroCopy = {
   es: {
+    eyebrow: 'Activos digitales',
     title: 'Sistemas que optimizan tu operación.',
     body: 'Software a medida, automatización, branding y desarrollo web con estética cuidada.',
     project: 'Cuéntanos tu proyecto',
   },
   en: {
+    eyebrow: 'Digital assets',
     title: 'Systems that optimize your operations.',
     body: 'Custom software, automation, branding and carefully designed websites.',
     project: 'Tell us about your project',
   },
+} as const;
+export const bandCopy = {
+  es: { motion: 'Systems in Motion', crowd: 'Que te encuentren y se detengan.' },
+  en: { motion: 'Systems in Motion', crowd: 'Get found and make people stop.' },
 } as const;
 export const landingCopy = {
   "es": {
     "signature": {
       "title": "Signature System",
       "intro": "Tres piezas. Un solo motor para tu negocio.",
-      "body": "Una base de marca, una landing y un agente de atención y agenda por WhatsApp, conectados en una sola implementación.",
+      "body": "Un paquete completo: tu marca, una web que convierte y un agente que atiende y agenda, conectados en una sola implementación.",
+      "price": "950",
+      "currency": "USD",
+      "priceLabel": "Paquete inicial",
+      "priceNote": "El dominio va incluido. El hosting, las APIs y la mensajería se contratan aparte, a tu nombre.",
       "pieces": [
         {
-          "title": "Kit básico de marca",
-          "body": "Colores, tipografía y reglas visuales para una presencia coherente.",
+          "title": "Kit de marca",
+          "body": "Branding básico: colores, tipografía y reglas visuales para una presencia coherente.",
           "icon": "fingerprint"
         },
         {
-          "title": "Landing de conversión",
+          "title": "Web o landing de conversión",
           "body": "Tu oferta, con un camino claro para contactar, agendar o cotizar.",
           "icon": "browser"
         },
         {
-          "title": "Atención y agenda",
-          "body": "Un agente guiado o híbrido por WhatsApp que presenta opciones, captura datos y ayuda a agendar.",
+          "title": "Agente guiado o híbrido",
+          "body": "En WhatsApp o integrado a tu web. Presenta opciones, captura datos y ayuda a agendar.",
           "icon": "whatsapp-logo"
         }
       ],
@@ -115,24 +125,44 @@ export const landingCopy = {
       "title": "Antes de empezar.",
       "items": [
         {
-          "q": "¿Cuánto tarda el Signature System?",
-          "a": "A partir de 2 semanas, según el alcance y tus materiales. Confirmamos el plazo antes de empezar."
+          "q": "¿Qué hace VIRAND?",
+          "a": "Construimos sistemas para que tu negocio opere y venda mejor: marca, landings y sitios web, automatización de procesos, agentes de IA y software a medida. También gestionamos contenido para redes y pauta en Meta y Google."
+        },
+        {
+          "q": "¿Qué diferencia hay entre el Signature System y un proyecto a medida?",
+          "a": "El Signature System es un paquete cerrado y de precio fijo: kit de marca, landing y un agente guiado o híbrido, desde 2 semanas. Un proyecto a medida se diseña alrededor de tus procesos y se cotiza según su alcance. Si no sabes cuál necesitas, lo definimos contigo en la primera conversación."
+        },
+        {
+          "q": "¿Hacen agentes de IA?",
+          "a": "Sí. Además del agente guiado o híbrido del Signature System, desarrollamos agentes de IA especializados para tu negocio: atienden a tus clientes, resuelven dudas, califican prospectos, cotizan o agendan según tus reglas y tu información. Funcionan en WhatsApp o integrados a tu web."
+        },
+        {
+          "q": "Mi proceso es muy particular, ¿se puede automatizar?",
+          "a": "Muchas veces sí. Antes de construir analizamos cómo trabajas y definimos qué conviene automatizar. Si algo no se puede o no vale la pena, te lo decimos desde el principio. Los procesos con reglas propias o variables muy específicas son justo lo que trabajamos a medida."
+        },
+        {
+          "q": "¿Con qué tipo de negocios trabajan?",
+          "a": "Sobre todo con negocios que manejan agenda o atienden clientes todos los días: clínicas, estética, restaurantes, almacenes y servicios con citas. Si el tuyo es distinto, cuéntanos cómo opera y vemos cómo ayudarte."
         },
         {
           "q": "¿Cómo se define el precio?",
-          "a": "Precio fijo por implementación, sin mensualidades obligatorias. Definimos el alcance y el valor antes de empezar."
-        },
-        {
-          "q": "¿Qué recibo al final?",
-          "a": "El kit básico de marca, la landing, el agente de atención y agenda por WhatsApp, un manual de uso y tus accesos."
+          "a": "El Signature System tiene precio fijo por implementación, sin mensualidades obligatorias. Los proyectos a medida se cotizan según su alcance, y antes de empezar defines con nosotros qué incluye y cuánto cuesta."
         },
         {
           "q": "¿Quién paga las APIs y la mensajería?",
-          "a": "Las paga el cliente, al igual que los servicios de terceros como dominio y hosting. Los contratas a tu nombre. VIRAND te enseña a configurarlos y te acompaña en el proceso."
+          "a": "Las paga el cliente, al igual que los servicios de terceros como el hosting. Los contratas a tu nombre. El dominio lo incluimos nosotros. VIRAND te enseña a configurarlos y te acompaña en el proceso."
         },
         {
-          "q": "¿Cómo funciona el agente?",
-          "a": "Es guiado o híbrido. Presenta opciones, acompaña a tus clientes y captura información como servicio, horario y datos de contacto."
+          "q": "¿Qué recibo al terminar y hay apoyo después?",
+          "a": "Recibes el sistema funcionando, su manual de uso y tus accesos. Si más adelante quieres apoyo, como una sesión de explicación o ajustes puntuales, se acuerda aparte."
+        },
+        {
+          "q": "¿Necesito conocimientos técnicos?",
+          "a": "No. Te entregamos un manual de uso y te enseñamos a configurar y recargar los servicios que contratas."
+        },
+        {
+          "q": "¿Cómo empiezo?",
+          "a": "Cuéntanos tu proyecto en el cuestionario o escríbenos por WhatsApp. Te respondemos por el canal que prefieras y, si encaja, agendamos una llamada."
         }
       ]
     }
@@ -141,21 +171,25 @@ export const landingCopy = {
     "signature": {
       "title": "Signature System",
       "intro": "Three parts. One engine for your business.",
-      "body": "A brand foundation, a landing page and a WhatsApp customer service and scheduling agent, connected in one implementation.",
+      "body": "One complete package: your brand, a website that converts and an agent that answers and schedules, connected in one implementation.",
+      "price": "950",
+      "currency": "USD",
+      "priceLabel": "Starter package",
+      "priceNote": "The domain is included. Hosting, APIs and messaging are contracted separately, in your name.",
       "pieces": [
         {
-          "title": "Basic brand kit",
-          "body": "Colors, typography and visual rules for a consistent presence.",
+          "title": "Brand kit",
+          "body": "Basic branding: colors, typography and visual rules for a consistent presence.",
           "icon": "fingerprint"
         },
         {
-          "title": "Conversion landing page",
+          "title": "Conversion website or landing page",
           "body": "Your offer, with a clear way to inquire, schedule or request a quote.",
           "icon": "browser"
         },
         {
-          "title": "Customer service and scheduling",
-          "body": "A guided or hybrid WhatsApp agent that presents options, captures details and helps schedule appointments.",
+          "title": "Guided or hybrid agent",
+          "body": "On WhatsApp or built into your website. It presents options, captures details and helps schedule appointments.",
           "icon": "whatsapp-logo"
         }
       ],
@@ -221,24 +255,44 @@ export const landingCopy = {
       "title": "Before we start.",
       "items": [
         {
-          "q": "How long does Signature System take?",
-          "a": "Starting at 2 weeks, depending on scope and your materials. We confirm the timeframe before work starts."
+          "q": "What does VIRAND do?",
+          "a": "We build systems so your business runs and sells better: branding, landing pages and websites, process automation, AI agents and custom software. We also manage social media content and Meta and Google ads."
+        },
+        {
+          "q": "What is the difference between Signature System and a custom project?",
+          "a": "Signature System is a closed, fixed-price package: a brand kit, a landing page and a guided or hybrid agent, starting at 2 weeks. A custom project is designed around your processes and quoted based on scope. If you are not sure which one you need, we work it out together in the first conversation."
+        },
+        {
+          "q": "Do you build AI agents?",
+          "a": "Yes. Besides the guided or hybrid agent in Signature System, we develop specialized AI agents for your business: they answer your customers, resolve questions, qualify leads, quote or schedule following your rules and your information. They work on WhatsApp or built into your website."
+        },
+        {
+          "q": "My process is very specific. Can it be automated?",
+          "a": "Often, yes. Before building, we analyze how you work and define what makes sense to automate. If something cannot be done or is not worth doing, we tell you from the start. Processes with their own rules or very specific variables are exactly what we build custom."
+        },
+        {
+          "q": "What kinds of businesses do you work with?",
+          "a": "Mostly businesses that handle appointments or serve customers every day: clinics, aesthetics, restaurants, stores and appointment-based services. If yours is different, tell us how it operates and we will see how we can help."
         },
         {
           "q": "How is the price set?",
-          "a": "A fixed price per implementation, with no mandatory monthly fees. We agree on scope and price before work starts."
-        },
-        {
-          "q": "What do I receive?",
-          "a": "The basic brand kit, landing page, WhatsApp customer service and scheduling agent, a usage manual and your access."
+          "a": "Signature System has a fixed price per implementation, with no mandatory monthly fees. Custom projects are quoted based on scope, and before we start you agree with us on what is included and what it costs."
         },
         {
           "q": "Who pays for APIs and messaging?",
-          "a": "You pay for them, along with third-party services such as your domain and hosting. You contract them in your name. VIRAND shows you how to set them up and supports you through the process."
+          "a": "You pay for them, along with third-party services such as hosting. You contract them in your name. We include the domain. VIRAND shows you how to set them up and supports you through the process."
         },
         {
-          "q": "How does the agent work?",
-          "a": "It uses a guided or hybrid flow. It presents options, assists your customers and captures information such as service, time and contact details."
+          "q": "What do I receive at the end, and is there support afterwards?",
+          "a": "You receive the working system, its usage manual and your access. If you want support later, such as an explanation session or specific adjustments, it is agreed separately."
+        },
+        {
+          "q": "Do I need technical knowledge?",
+          "a": "No. We give you a usage manual and show you how to set up and top up the services you contract."
+        },
+        {
+          "q": "How do I get started?",
+          "a": "Tell us about your project in the questionnaire or message us on WhatsApp. We reply through the channel you prefer and, if it is a fit, we schedule a call."
         }
       ]
     }

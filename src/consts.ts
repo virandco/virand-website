@@ -2,6 +2,10 @@ export const SITE = { name: 'VIRAND', domain: 'virand.co' } as const;
 export const WHATSAPP_NUMBER = '573228802540';
 export const WHATSAPP = { isProvisional: false, url: 'https://wa.me/573228802540' } as const;
 export const CONTACT_EMAIL = 'contacto@virand.co';
+export const SOCIAL = [
+  { id: 'instagram', label: 'Instagram', icon: 'ph:instagram-logo', url: 'https://www.instagram.com/virand.co/' },
+  { id: 'facebook', label: 'Facebook', icon: 'ph:facebook-logo', url: 'https://www.facebook.com/profile.php?id=61594997916698' },
+] as const;
 export const UMAMI_WEBSITE_ID = '7acebee5-620e-4e8d-a055-22f025bc3018';
 export const CALENDAR_BOOKING_URL = 'https://calendar.app.google/Uxfopn8jZcti3CKs7';
 export const CALENDAR_EMBED_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0VdipIduBeeh9cx7VfxPLSBrwpSQxmDPODKbOeXyRjN0z7u5IQA7v4KOUUpZSajXzN3hni26qP?gv=true';

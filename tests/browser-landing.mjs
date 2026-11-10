@@ -28,10 +28,10 @@ try {
   assert.equal(await page.locator('html').getAttribute('lang'),lang);
   assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
   const lcp=await page.evaluate(()=>window.__qaLcp.at(-1));
-  assert.ok(!requests.some(url=>url.includes('iconScene')),'3D loaded before viewport');
+  assert.ok(!requests.some(url=>/\/scene\.[\w-]+\.js$/.test(url)),'3D loaded before viewport');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'initial overflow');
-  const video=page.locator('[data-hero-video]');
-  await page.waitForFunction(()=>document.querySelector('[data-hero-video]').readyState>=2);
+  const video=page.locator('.hero video[data-scrub-video]');
+  await page.waitForFunction(()=>document.querySelector('.hero video[data-scrub-video]').readyState>=2);
   const before=await video.evaluate(video=>video.currentTime);
   await page.evaluate(()=>scrollTo({top:300,behavior:'instant'}));await page.waitForTimeout(900);
   const after=await video.evaluate(video=>video.currentTime);assert.ok(after>before+.3,'video scrub failed');
@@ -48,7 +48,7 @@ try {
   await page.evaluate(()=>document.querySelectorAll('header.nav,.skip-link').forEach(el=>el.style.visibility=''));
   await page.locator('[data-closing-icon]').scrollIntoViewIfNeeded();await page.waitForTimeout(1600);
   const mode=await page.locator('[data-closing-icon]').getAttribute('data-icon-mode');
-  if(width>=768) assert.equal(mode,'3d','3d missing'); else assert.notEqual(mode,'3d');
+  assert.equal(mode,'3d','3d missing');
   if([1440,390].includes(width)) await page.locator('.closing').screenshot({path:out+'/'+lang+'-'+width+'-'+theme+'-cierre.jpg',quality:85});
   if(width===1440){
    await page.locator('[data-theme-toggle]').click();
@@ -81,7 +81,7 @@ try {
   await page.locator('[name=consent]').check();
   if([1440,390].includes(width)){await page.evaluate(()=>document.querySelectorAll('header.nav,.skip-link').forEach(el=>el.style.visibility='hidden'));await page.locator('#cuestionario').screenshot({path:out+'/'+lang+'-'+width+'-'+theme+'-contacto.jpg',quality:85});await page.evaluate(()=>document.querySelectorAll('header.nav,.skip-link').forEach(el=>el.style.visibility=''));}
   const popupPromise=page.waitForEvent('popup');await page.locator('[data-whatsapp]').click();const popup=await popupPromise;
-  await popup.waitForLoadState('domcontentloaded').catch(()=>{});
+  await popup.waitForURL(url=>url.href.startsWith('https://wa.me/'),{timeout:8000}).catch(()=>{});
   const wa=popup.url();assert.ok(wa.startsWith('https://wa.me/573228802540?text='));const message=new URL(wa).searchParams.get('text');assert.match(message,/Taller de prueba/);assert.match(message,/Signature System/);assert.ok(!message.includes('presupuesto bajo'));await popup.close();
   await page.route('**/api/proyecto',route=>route.fulfill({status:503,contentType:'application/json',body:'{"ok":false,"code":"unavailable"}'}));
   await page.locator('[data-submit]').click();await page.waitForTimeout(150);assert.equal(await page.locator('[data-status]').isVisible(),true);
@@ -105,8 +105,8 @@ try {
  const reduced=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'});
  const page=await reduced.newPage(),media=[];page.on('request',request=>media.push(request.url()));await page.goto('http://127.0.0.1:4323/');
  await page.locator('[data-closing-icon]').scrollIntoViewIfNeeded();await page.waitForTimeout(500);
- assert.equal(media.some(url=>url.includes('hero-scroll.mp4')||url.includes('iconScene')),false,'reduced motion loaded animation');
- assert.equal(await page.locator('[data-closing-icon] img').isVisible(),true);
+ assert.equal(media.some(url=>url.endsWith('.mp4')||/\/scene\.[\w-]+\.js$/.test(url)),false,'reduced motion loaded animation');
+ assert.equal(await page.locator('[data-closing-icon] .closing__flat').isVisible(),true);
  await page.screenshot({path:out+'/movimiento-reducido.jpg',quality:85});await reduced.close();
  const noGl=await browser.newContext({viewport:{width:1440,height:900}});await noGl.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,...args){return type.startsWith('webgl')?null:original.call(this,type,...args);};});
  const noGlPage=await noGl.newPage();await noGlPage.goto('http://127.0.0.1:4323/');await noGlPage.locator('[data-closing-icon]').scrollIntoViewIfNeeded();await noGlPage.waitForTimeout(700);assert.equal(await noGlPage.locator('[data-closing-icon]').getAttribute('data-icon-mode'),'static');await noGl.close();

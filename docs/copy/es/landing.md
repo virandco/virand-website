@@ -6,19 +6,23 @@ Fuente: encargo CODEX-007 y textos aprobados de main. ES es la fuente; EN conser
 
 Tres piezas. Un solo motor para tu negocio.
 
-Una base de marca, una landing y un agente de atención y agenda por WhatsApp, conectados en una sola implementación.
+Un paquete completo: tu marca, una web que convierte y un agente que atiende y agenda, conectados en una sola implementación.
 
-### Kit básico de marca
+**950 USD** · Paquete inicial. Es el único precio publicado en el sitio.
 
-Colores, tipografía y reglas visuales para una presencia coherente.
+El dominio va incluido. El hosting, las APIs y la mensajería se contratan aparte, a tu nombre.
 
-### Landing de conversión
+### Kit de marca
+
+Branding básico: colores, tipografía y reglas visuales para una presencia coherente.
+
+### Web o landing de conversión
 
 Tu oferta, con un camino claro para contactar, agendar o cotizar.
 
-### Atención y agenda
+### Agente guiado o híbrido
 
-Un agente guiado o híbrido por WhatsApp que presenta opciones, captura datos y ayuda a agendar.
+En WhatsApp o integrado a tu web. Presenta opciones, captura datos y ayuda a agendar.
 
 - Precio fijo por implementación
 
@@ -76,22 +80,42 @@ Identidad y reglas para mantenerla coherente.
 
 ## Antes de empezar.
 
-### ¿Cuánto tarda el Signature System?
+### ¿Qué hace VIRAND?
 
-A partir de 2 semanas, según el alcance y tus materiales. Confirmamos el plazo antes de empezar.
+Construimos sistemas para que tu negocio opere y venda mejor: marca, landings y sitios web, automatización de procesos, agentes de IA y software a medida. También gestionamos contenido para redes y pauta en Meta y Google.
+
+### ¿Qué diferencia hay entre el Signature System y un proyecto a medida?
+
+El Signature System es un paquete cerrado y de precio fijo: kit de marca, landing y un agente guiado o híbrido, desde 2 semanas. Un proyecto a medida se diseña alrededor de tus procesos y se cotiza según su alcance. Si no sabes cuál necesitas, lo definimos contigo en la primera conversación.
+
+### ¿Hacen agentes de IA?
+
+Sí. Además del agente guiado o híbrido del Signature System, desarrollamos agentes de IA especializados para tu negocio: atienden a tus clientes, resuelven dudas, califican prospectos, cotizan o agendan según tus reglas y tu información. Funcionan en WhatsApp o integrados a tu web.
+
+### Mi proceso es muy particular, ¿se puede automatizar?
+
+Muchas veces sí. Antes de construir analizamos cómo trabajas y definimos qué conviene automatizar. Si algo no se puede o no vale la pena, te lo decimos desde el principio. Los procesos con reglas propias o variables muy específicas son justo lo que trabajamos a medida.
+
+### ¿Con qué tipo de negocios trabajan?
+
+Sobre todo con negocios que manejan agenda o atienden clientes todos los días: clínicas, estética, restaurantes, almacenes y servicios con citas. Si el tuyo es distinto, cuéntanos cómo opera y vemos cómo ayudarte.
 
 ### ¿Cómo se define el precio?
 
-Precio fijo por implementación, sin mensualidades obligatorias. Definimos el alcance y el valor antes de empezar.
-
-### ¿Qué recibo al final?
-
-El kit básico de marca, la landing, el agente de atención y agenda por WhatsApp, un manual de uso y tus accesos.
+El Signature System tiene precio fijo por implementación, sin mensualidades obligatorias. Los proyectos a medida se cotizan según su alcance, y antes de empezar defines con nosotros qué incluye y cuánto cuesta.
 
 ### ¿Quién paga las APIs y la mensajería?
 
-Las paga el cliente, al igual que los servicios de terceros como dominio y hosting. Los contratas a tu nombre. VIRAND te enseña a configurarlos y te acompaña en el proceso.
+Las paga el cliente, al igual que los servicios de terceros como el hosting. Los contratas a tu nombre. El dominio lo incluimos nosotros. VIRAND te enseña a configurarlos y te acompaña en el proceso.
 
-### ¿Cómo funciona el agente?
+### ¿Qué recibo al terminar y hay apoyo después?
 
-Es guiado o híbrido. Presenta opciones, acompaña a tus clientes y captura información como servicio, horario y datos de contacto.
+Recibes el sistema funcionando, su manual de uso y tus accesos. Si más adelante quieres apoyo, como una sesión de explicación o ajustes puntuales, se acuerda aparte.
+
+### ¿Necesito conocimientos técnicos?
+
+No. Te entregamos un manual de uso y te enseñamos a configurar y recargar los servicios que contratas.
+
+### ¿Cómo empiezo?
+
+Cuéntanos tu proyecto en el cuestionario o escríbenos por WhatsApp. Te respondemos por el canal que prefieras y, si encaja, agendamos una llamada.

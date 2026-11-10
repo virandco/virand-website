@@ -1,4 +1,11 @@
-/* The content and poster remain available without JavaScript. */
+/* The content and posters remain available without JavaScript. */
 [data-reveal] { opacity: 1 !important; transform: none !important; }
-.hero { height: auto !important; }
+.hero, .box { height: auto !important; }
 .hero__stage { position: relative !important; }
+.box__stage { position: relative !important; height: auto !important; min-height: 100svh; padding-block: 6rem; }
+.box__offer { opacity: 1 !important; transform: none !important; }
+.box__poster { opacity: .45 !important; }
+.box__glow { opacity: 1 !important; }
+.box__anchor { top: 0 !important; }
+.chat { display: none !important; }
+.box__fade { display: none !important; }

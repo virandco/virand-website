@@ -1,5 +1,5 @@
 // Fixed categories only. Unknown properties and free text never reach Umami.
-const events = ['cuestionario_iniciado','cuestionario_completado','cta_whatsapp','form_enviado','agenda_vista'] as const;
+const events = ['cuestionario_iniciado','cuestionario_completado','cta_whatsapp','form_enviado','agenda_vista','chat_abierto'] as const;
 type EventName = typeof events[number];
 export function track(name: EventName, props: {idioma?:'es'|'en'} = {}): void {
  try {

@@ -1,26 +1,57 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { getLangFromUrl, routePath } from '../i18n/utils';
 import Wordmark from './Wordmark.astro';
-import { CONTACT_EMAIL } from '../consts';
+import { CONTACT_EMAIL, SOCIAL } from '../consts';
 const lang = getLangFromUrl(Astro.url);
 const links = lang === 'es' ? ['Privacidad', 'Términos', 'Cookies'] : ['Privacy', 'Terms', 'Cookies'];
 ---
 <footer class="footer">
   <div class="shell footer__inner">
-    <Wordmark lang={lang} size={18} />
-    <a class="email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-    <nav aria-label={lang === 'es' ? 'Información legal' : 'Legal information'}>
-      {(['privacy','terms','cookies'] as const).map((route,i) => <a href={routePath(route,lang)}>{links[i]}</a>)}
-    </nav>
-    <p>© {new Date().getFullYear()} VIRAND</p>
+    <div class="footer__left">
+      <nav class="social" aria-label={lang === 'es' ? 'Redes sociales' : 'Social media'}>
+        {SOCIAL.map(item => <a href={item.url} target="_blank" rel="noopener noreferrer">
+          <Icon name={item.icon} aria-hidden="true" /><span>{item.label}</span>
+        </a>)}
+      </nav>
+      <nav class="legal" aria-label={lang === 'es' ? 'Información legal' : 'Legal information'}>
+        {(['privacy', 'terms', 'cookies'] as const).map((route, i) => <a href={routePath(route, lang)}>{links[i]}</a>)}
+      </nav>
+    </div>
+    <div class="footer__logo"><Wordmark lang={lang} orientation="vertical" size={7} /></div>
+    <div class="footer__right">
+      <a class="email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      <p>© {new Date().getFullYear()} VIRAND</p>
+    </div>
   </div>
 </footer>
 <style>
-  .footer { border-top: 1px solid var(--line); padding-block: 3rem; }
-  .footer__inner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; font-size: .8125rem; }
+  /* No rule on top. Dark: the page fades into solid black. Light: it stays the page
+     white, with the dark icon. Extra bottom room keeps the chat launcher off the text. */
+  .footer { padding-block: clamp(7rem, 16vh, 10rem) 6rem; background: linear-gradient(to bottom, var(--page-bg), #000 clamp(5rem, 12vh, 8rem)); }
+  :global(:root[data-theme="light"]) .footer { background: var(--page-bg); }
+  .footer__inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 2rem; font-size: .8125rem; }
+  .footer__left { display: grid; gap: 1.5rem; justify-items: start; }
+  /* Accent hairlines: gold on dark, wine on light. */
+  .footer { --mark: var(--gold); }
+  :global(:root[data-theme="light"]) .footer { --mark: var(--wine); }
+  .social { display: flex; gap: .75rem; }
+  .social a { display: inline-flex; align-items: center; gap: .5rem; padding: .55rem .85rem .55rem .7rem; border: 1px solid var(--line-strong); color: var(--text-strong); font-weight: 600; transition: border-color .3s var(--ease-brand), background-color .3s var(--ease-brand), color .3s var(--ease-brand), translate .35s var(--ease-brand); }
+  .social :global(svg) { width: 1.15rem; height: 1.15rem; transition: transform .45s var(--ease-brand); }
+  .social a:hover { border-color: var(--mark); color: var(--accent-text); }
+  .social a:hover :global(svg) { transform: rotate(-10deg) scale(1.15); }
+  .legal { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+  .legal a, .email { position: relative; }
+  .legal a::after, .email::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: 0 50%; transition: transform .45s var(--ease-brand); }
+  .legal a:hover, .email:hover { color: var(--accent-text); }
+  .legal a:hover::after, .email:hover::after { transform: scaleX(1); }
+  .footer__logo { justify-self: center; align-self: center; color: var(--text-strong); opacity: .9; }
+  .footer__right { display: grid; gap: 1.5rem; justify-items: end; text-align: right; }
   .email { color: var(--text-strong); }
-  nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-  a:hover { color: var(--accent-text); }
-  p { margin: 0; text-align: right; }
-  @media(max-width: 639px) { .footer__inner { grid-template-columns: 1fr; } p { text-align: left; } }
+  p { margin: 0; }
+  @media (max-width: 767px) {
+    .footer__inner { grid-template-columns: 1fr; justify-items: start; gap: 2.5rem; }
+    .footer__logo { justify-self: center; order: -1; }
+    .footer__right { justify-items: start; text-align: left; }
+  }
 </style>
